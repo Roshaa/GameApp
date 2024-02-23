@@ -41,11 +41,14 @@
             <a class="text-xl" href="template.html"><button class="btn">Trade</button></a>
             <a class="text-xl" href="template.html"><button class="btn">Ranking</button></a>
             <a class="text-xl" href="template.html"><button class="btn">Horse</button></a>
+            <a class="text-xl" href="devpage"><button class="btn">Devpage</button></a>
 
         </div>
 
 
-        <div class="w-5/6">@yield('pagecontent')</div>
+        <div class="w-5/6">@yield('pagecontent')
+            
+        </div>
     </div>
 
 

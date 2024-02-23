@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
+use App\Http\Requests\MissionOptionRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +26,9 @@ Route::get('/profile', function () {
     return view('profile.edit');
 });
 
+
+
+
 Route::get('/playermissions', function () {
     return view('playermissions');
 })->middleware(['auth', 'verified'])->name('playermissions');
@@ -31,6 +36,35 @@ Route::get('/playermissions', function () {
 Route::get('/playerprofile', function () {
     return view('playerprofile');
 })->middleware(['auth', 'verified'])->name('playerprofile');
+
+Route::get('/devpage', function () {
+    
+
+    return view('devpage', ['users' => User::get()]);
+    
+})->middleware(['auth', 'verified'])->name('devpage');
+
+
+Route::post('/playermissions',function(MissionOptionRequest $request){
+
+    $optionvalue=$request->option;
+
+    return redirect()->route('playermissions')->with('missionresult',$optionvalue);
+
+})->name('missions.option');
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
