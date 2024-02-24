@@ -45,4 +45,9 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
+    //retorna id do utilizador com login
+    public function getloggedinfo(){
+        $user_id= Auth::user()->id;
+        return $user_id;
+    }
 }

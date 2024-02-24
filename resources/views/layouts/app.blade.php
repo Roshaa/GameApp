@@ -29,28 +29,39 @@
 </head>
 
 <body>
-@include('layouts.navigation')
     <div class="flex">
-        <div class="w-1/6 border-r-2 border-slate-700">
+        <div class="w-1/6 border-r-2 border-slate-700 h-screen">
 
             <a class="text-xl" href="playerprofile"><button class="btn">Player Profile</button></a>
+            <a class="text-xl" href="template.html"><button class="btn">Horse</button></a>
             <a class="text-xl" href="template.html"><button class="btn">Job</button></a>
             <a class="text-xl" href="template.html"><button class="btn">Shop</button></a>
             <a class="text-xl" href="playermissions"><button class="btn">Missions</button></a>
             <a class="text-xl" href="template.html"><button class="btn">Raid</button></a>
             <a class="text-xl" href="template.html"><button class="btn">Trade</button></a>
             <a class="text-xl" href="template.html"><button class="btn">Ranking</button></a>
-            <a class="text-xl" href="template.html"><button class="btn">Horse</button></a>
             <a class="text-xl" href="devpage"><button class="btn">Devpage</button></a>
+
+            <div class="flex justify-end p-2 border-b-2 border-slate-700">
+
+                <a class=" text-lg" href="profile">Profile</a>
+        
+                <form class="mx-5 text-lg" method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <a href="route('logout')" onclick="event.preventDefault();this.closest('form').submit();">{{ __('Log Out') }}</a>
+                </form>
+        
+        
+        </div>
+        
 
         </div>
 
 
-        <div class="w-5/6">@yield('pagecontent')
+        <div class="w-5/6 h-screen flex">@yield('pagecontent')
             
         </div>
     </div>
-
 
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>

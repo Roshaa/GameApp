@@ -10,6 +10,8 @@
     ||
     {{$user->id}}
     @endforeach
+    <br>
+    <p>User logged id: {{$displayid}}</p>
 </div>
 
 @endsection
