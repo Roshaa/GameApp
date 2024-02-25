@@ -1,22 +1,19 @@
 @extends('Layouts.app')
 @section('pagecontent')
-    <div class="flex justify-center mt-2">
-        <form action="" method="post">
-            @csrf
-            <button type="submit" name="option" value="1" class="w-24 border mx-2">Option 1</button>
-        </form>
-        <form action="" method="POST">
-            @csrf
-            <button type="submit" name="option" value="2" class="w-24 border mx-2">Option 2</button>
-        </form>
-        <form action="" method="POST">
-            @csrf
-            <button type="submit" name="option" value="3" class="w-24 border mx-2">Option 3</button>
-        </form>
-    </div>
+    <form action="" method="post" class="flex justify-center w-full mt-3">
+        @csrf
+        <div class="flex">
+            @foreach ($mobs as $mob)
+                <div class="w-2/6 h-3/6 mx-2 text-center" alt=""> <img src="{{ $mob->imglink }}">
+                    <button type="submit" name="option" value="{{ $mob->id }}"
+                        class="p-5 mt-3 border w-full text-2xl">{{ $mob->MobName }}</button>
+                </div>
+            @endforeach
+        </div>
+
+    </form>
 
     @if (session()->has('missionresult'))
         <div>{{ session('missionresult') }}</div>
     @endif
-
 @endsection

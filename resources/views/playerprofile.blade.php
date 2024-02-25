@@ -9,15 +9,14 @@
                 @case('Assassin')
                     <img src="images/assassinclass.jpg" class="mt-3" alt="">
                 @break
-
+                
                 @case('Paladin')
                     <img src="images/paladinclass.jpg" class="mt-3" alt="">
                 @break
 
                 @case('Warlock')
-                @break
-
                 <img src="images/warlockclass.jpg" class="mt-3" alt="">
+                @break
 
                 @default
             @endswitch
@@ -38,6 +37,9 @@
         <p>Weaponsmith: {{$Weaponsmith}}</p>
         <p>Jewellery: {{$Jewellery}}</p>
         <p>Librarian {{$Librarian}}</p>
+        <br>
+        <p>HP: {{$hp}}</p>
+        <p>Damage: {{$damage}}</p>
 
 
     </div>

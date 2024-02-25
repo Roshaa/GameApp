@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Class_stats;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GeneratePlayerStats;
 
@@ -11,7 +10,6 @@ use App\Models\UserCharacter;
 
 use App\Http\Requests\MissionOptionRequest;
 use App\Http\Requests\ChooseClassRequest;
-use Illuminate\Http\Request;
 
 //possivelmente mover para outro sitio
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +29,9 @@ Route::get('/profile', function () {
     return view('profile.edit');
 });
 Route::get('/chooseclass', function () {
+    $user_id= Auth::user()->id;
+    $class = DB::table('user_characters')->where('user_id','=', $user_id)->value('class');
+    if($class!= ''){return redirect()->route('playerprofile');}
     return view('chooseclass');
 });
 
@@ -39,70 +40,15 @@ Route::get('/chooseclass', function () {
 
 
 Route::get('/playermissions', function () {
-    return view('playermissions');
+
+    $mobs=DB::table('mobsmissions')->get();
+
+    return view('playermissions', ['mobs'=> $mobs]);
 })->middleware(['auth', 'verified'])->name('playermissions');
 
 
-//Faz uma querie perante o utilizador com login e retorna uma view perante os dados
-Route::get('/playerprofile', function () {
-
-
-
-    $user_id= Auth::user()->id;
-    
-    $playername= DB::table('USERS')->where('id','=', $user_id)->value('name');
-    $class = DB::table('user_characters')->where('user_id','=', $user_id)->value('class');
-
-    $getstats = GeneratePlayerStats::generatestats();
-
-    $mainstat= $getstats[0];
-    $Willpower= $getstats[1];
-    $Constituion= $getstats[2];
-    $Expertise= $getstats[3];
-    $Resistance= $getstats[4];
-    $Mastery= $getstats[5];
-    $Alchemy= $getstats[6];
-    $Armoursmith= $getstats[7];
-    $Weaponsmith= $getstats[8];
-    $Jewellery= $getstats[9];
-    $Librarian= $getstats[10];
-
-    return view('playerprofile', [
-    'class'=> $class
-    ,'playername'=> $playername
-    ,'mainstat'=> $mainstat 
-    ,'Willpower'=> $Willpower
-    ,'Constituion'=> $Constituion
-    ,'Expertise'=> $Expertise
-    ,'Resistance'=> $Resistance
-    ,'Mastery'=> $Mastery
-    ,'Alchemy'=> $Alchemy
-    ,'Armoursmith'=> $Armoursmith
-    ,'Weaponsmith'=> $Weaponsmith
-    ,'Jewellery'=> $Jewellery
-    ,'Librarian'=> $Librarian
-    ]
-
-);
-
-
-})->middleware(['auth', 'verified'])->name('playerprofile');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//Retorna a view playerprofile perante uma funcao da class generateplayerstats que dá os valores dos stats do jogador
+Route::get('/playerprofile', [GeneratePlayerStats::class, 'returnprofilewithstats'])->middleware(['auth', 'verified'])->name('playerprofile');
 
 Route::get('/devpage', function () {
 
@@ -111,8 +57,6 @@ Route::get('/devpage', function () {
     return view('devpage', ['users' => User::get()], ['displayid'=> $user_id]);
     
 })->middleware(['auth', 'verified'])->name('devpage');
-
-
 
 //Player mission e insere item se for concluida
 Route::post('/playermissions',function(MissionOptionRequest $request){
@@ -134,11 +78,6 @@ Route::post('/playermissions',function(MissionOptionRequest $request){
     return redirect()->route('playermissions')->with('missionresult',$optionvalue);
 
 })->name('missions.option');
-
-
-
-
-
 
 //Post para o utilizador escolher a class
 Route::post('/chooseclass',function(ChooseClassRequest $request){
