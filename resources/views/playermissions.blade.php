@@ -1,6 +1,6 @@
 @extends('Layouts.app')
 @section('pagecontent')
-    <form action="" method="post" class="flex justify-center w-full mt-3">
+    <form action="combatresult" method="post" class="flex justify-center w-full mt-3">
         @csrf
         <div class="flex">
             @foreach ($mobs as $mob)

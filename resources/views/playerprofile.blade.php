@@ -9,13 +9,13 @@
                 @case('Assassin')
                     <img src="images/assassinclass.jpg" class="mt-3" alt="">
                 @break
-                
+
                 @case('Paladin')
                     <img src="images/paladinclass.jpg" class="mt-3" alt="">
                 @break
 
                 @case('Warlock')
-                <img src="images/warlockclass.jpg" class="mt-3" alt="">
+                    <img src="images/warlockclass.jpg" class="mt-3" alt="">
                 @break
 
                 @default
@@ -23,24 +23,40 @@
         </div>
     </div>
     <div class="w-2/12 mt-5">
-    
-        <p>Main stat: {{$mainstat}}</p>
-        <br>
-        <p>Willpower: {{$Willpower}}</p>
-        <p>Constituion: {{$Constituion}}</p>
-        <p>Expertise: {{$Expertise}}</p>
-        <p>Resistance: {{$Resistance}}</p>
-        <p>Mastery: {{$Mastery}}</p>
-        <br>
-        <p>Alchemy: {{$Alchemy}}</p>
-        <p>Armoursmith: {{$Armoursmith}}</p>
-        <p>Weaponsmith: {{$Weaponsmith}}</p>
-        <p>Jewellery: {{$Jewellery}}</p>
-        <p>Librarian {{$Librarian}}</p>
-        <br>
-        <p>HP: {{$hp}}</p>
-        <p>Damage: {{$damage}}</p>
 
+        <p>Main stat: {{ $mainstat }}</p>
+        <br>
+        <p>Willpower: {{ $Willpower }}</p>
+        <p>Constituion: {{ $Constituion }}</p>
+        <p>Expertise: {{ $Expertise }}</p>
+        <p>Resistance: {{ $Resistance }}</p>
+        <p>Mastery: {{ $Mastery }}</p>
+        <br>
+        <p>Alchemy: {{ $Alchemy }}</p>
+        <p>Armoursmith: {{ $Armoursmith }}</p>
+        <p>Weaponsmith: {{ $Weaponsmith }}</p>
+        <p>Jewellery: {{ $Jewellery }}</p>
+        <p>Librarian {{ $Librarian }}</p>
+        <br>
+        <p>HP: {{ $hp }}</p>
+        <p>Damage: {{ $damage }}</p>
+        <p>Skill Damage: {{ $skilldamage }}</p>
+        <p>Damage Reduction: {{ $damagereduction }}</p>
+        <p>
+            @switch($class)
+                @case('Assassin')
+                    {{ 'Critical Strike: ' }}
+                @break
+
+                @case('Paladin')
+                    {{ 'Self Heal: ' }}
+                @break
+
+                @case('Warlock')
+                    {{ 'Mana: ' }}
+                @break
+            @endswitch
+            {{ $ClassSpecial }}</p>
 
     </div>
     <div class="w-7/12 mt-5">
@@ -115,5 +131,4 @@
             </div>
         </div>
     </div>
-
 @endsection

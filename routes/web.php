@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GeneratePlayerStats;
+use App\Http\Controllers\CombatPVE;
 
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
@@ -28,6 +29,9 @@ Route::get('/dashboard', function () {
 Route::get('/profile', function () {
     return view('profile.edit');
 });
+Route::get('/combatresult', function () {
+    return view('combatresult');
+})->name('combatresult');
 Route::get('/chooseclass', function () {
     $user_id= Auth::user()->id;
     $class = DB::table('user_characters')->where('user_id','=', $user_id)->value('class');
@@ -59,10 +63,14 @@ Route::get('/devpage', function () {
 })->middleware(['auth', 'verified'])->name('devpage');
 
 //Player mission e insere item se for concluida
-Route::post('/playermissions',function(MissionOptionRequest $request){
-
+Route::post('/combatresult',function(MissionOptionRequest $request){
 
     $optionvalue=$request->option;
+    $combatinfo=CombatPVE::combat($optionvalue);
+
+    extract($combatinfo);
+    
+    /*
     $user_id= Auth::user()->id;
 
     $Items=$request->validated();
@@ -73,11 +81,21 @@ Route::post('/playermissions',function(MissionOptionRequest $request){
     $Items->stat1=1;
     $Items->stat2=2;
 
-    $Items->save();
+    $Items->save();*/
 
-    return redirect()->route('playermissions')->with('missionresult',$optionvalue);
+    return view(
+        'combatresult',
+        [
+            'class' => "$class",
+            'mobimg' => "$mobimg",
+            'playermissinghp'=>"$playermissinghp",
+            'mobmissinghp'=>"$mobmissinghp",
+        ]
+    );
 
 })->name('missions.option');
+
+
 
 //Post para o utilizador escolher a class
 Route::post('/chooseclass',function(ChooseClassRequest $request){
