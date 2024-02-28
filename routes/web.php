@@ -32,6 +32,8 @@ Route::get('/profile', function () {
 Route::get('/combatresult', function () {
     return view('combatresult');
 })->name('combatresult');
+
+//Class para o utilizador escolher, caso ja tenha escolhido redireciona para a sua profile
 Route::get('/chooseclass', function () {
     $user_id= Auth::user()->id;
     $class = DB::table('user_characters')->where('user_id','=', $user_id)->value('class');
@@ -39,14 +41,10 @@ Route::get('/chooseclass', function () {
     return view('chooseclass');
 });
 
-
-
-
-
+//Retorna os mobs que existem na db para esta view que permite uma escolha de 1 a 3
 Route::get('/playermissions', function () {
 
     $mobs=DB::table('mobsmissions')->get();
-
     return view('playermissions', ['mobs'=> $mobs]);
 })->middleware(['auth', 'verified'])->name('playermissions');
 
@@ -62,26 +60,14 @@ Route::get('/devpage', function () {
     
 })->middleware(['auth', 'verified'])->name('devpage');
 
-//Player mission e insere item se for concluida
+//Escolha nas missions recebe o post(escolha de 1 a 3) e faz o combate
+//Necessário solucao para evitar multiplos clicks na form
 Route::post('/combatresult',function(MissionOptionRequest $request){
 
     $optionvalue=$request->option;
     $combatinfo=CombatPVE::combat($optionvalue);
 
     extract($combatinfo);
-    
-    /*
-    $user_id= Auth::user()->id;
-
-    $Items=$request->validated();
-
-    $Items = new Items;
-    $Items->itemname='item insert teste';
-    $Items->user_owner_id=$user_id;
-    $Items->stat1=1;
-    $Items->stat2=2;
-
-    $Items->save();*/
 
     return view(
         'combatresult',
@@ -97,7 +83,7 @@ Route::post('/combatresult',function(MissionOptionRequest $request){
 
 
 
-//Post para o utilizador escolher a class
+//Post quando o utilizador escolhe a class -> route chooseclass
 Route::post('/chooseclass',function(ChooseClassRequest $request){
 
     $optionvalue=$request->Class;
@@ -117,6 +103,9 @@ Route::post('/chooseclass',function(ChooseClassRequest $request){
 
 })->name('chooseclass');
 
+
+
+//laravel default
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

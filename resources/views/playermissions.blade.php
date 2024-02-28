@@ -12,8 +12,6 @@
         </div>
 
     </form>
-
-    @if (session()->has('missionresult'))
-        <div>{{ session('missionresult') }}</div>
-    @endif
+    
+    <h2>ao clicar aqui varias vezes submete a form varias vezes</h2>
 @endsection
