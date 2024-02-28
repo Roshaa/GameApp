@@ -6,7 +6,7 @@ use App\Http\Controllers\CombatPVE;
 
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
-use App\Models\Items;
+use App\Models\playerinventory;
 use App\Models\UserCharacter;
 
 use App\Http\Requests\MissionOptionRequest;
@@ -98,6 +98,10 @@ Route::post('/chooseclass',function(ChooseClassRequest $request){
     $UserChar->level=1;
 
     $UserChar->save();
+
+    $playerinventory = new playerinventory;
+    $playerinventory->user_id= $user_id;  
+    $playerinventory->save();
 
     return redirect()->route('playerprofile');
 
