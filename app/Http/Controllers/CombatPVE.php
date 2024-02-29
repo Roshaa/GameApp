@@ -48,8 +48,14 @@ class CombatPVE extends Controller
                 break;
             case "Paladin":
 
+                $playerattack = PaladinCombat::PaladinAttack();
+                $playerdefend = PaladinCombat::PaladinDefend($mobdamage);
+
                 break;
             case "Warlock":
+
+                $playerattack = WarlockCombat::WarlockAttack();
+                $playerdefend = WarlockCombat::WarlockDefend($mobdamage);
 
                 break;
         }
@@ -57,7 +63,9 @@ class CombatPVE extends Controller
         while ($mobhp > 0 && $playerhp > 0) {
 
             $mobhp = $mobhp - $playerattack;
+            echo "$playerattack"."<br>";
             $playerhp = $playerhp - $playerdefend;
+            echo "$playerdefend"."<br>";
         }
 
         $combatresult = [

@@ -24,24 +24,24 @@
     </div>
     <div class="w-2/12 mt-5">
 
-        <p>Main stat: {{ $mainstat }}</p>
+        <p>Main stat: {{$GetStats['mainstat']  }}</p>
         <br>
-        <p>Willpower: {{ $Willpower }}</p>
-        <p>Constituion: {{ $Constituion }}</p>
-        <p>Expertise: {{ $Expertise }}</p>
-        <p>Resistance: {{ $Resistance }}</p>
-        <p>Mastery: {{ $Mastery }}</p>
+        <p>Willpower: {{$GetStats['Willpower']  }}</p>
+        <p>Constituion: {{$GetStats['Constituion']  }}</p>
+        <p>Expertise: {{$GetStats['Expertise']  }}</p>
+        <p>Resistance: {{$GetStats['Resistance'] }}</p>
+        <p>Mastery: {{$GetStats['Mastery']  }}</p>
         <br>
-        <p>Alchemy: {{ $Alchemy }}</p>
-        <p>Armoursmith: {{ $Armoursmith }}</p>
-        <p>Weaponsmith: {{ $Weaponsmith }}</p>
-        <p>Jewellery: {{ $Jewellery }}</p>
-        <p>Librarian {{ $Librarian }}</p>
+        <p>Alchemy: {{$GetStats['Alchemy']  }}</p>
+        <p>Armoursmith: {{$GetStats['Armoursmith']  }}</p>
+        <p>Weaponsmith: {{$GetStats['Weaponsmith']  }}</p>
+        <p>Jewellery: {{$GetStats['Jewellery']  }}</p>
+        <p>Librarian {{$GetStats['Librarian']  }}</p>
         <br>
-        <p>HP: {{ $hp }}</p>
-        <p>Damage: {{ $damage }}</p>
-        <p>Skill Damage: {{ $skilldamage }}</p>
-        <p>Damage Reduction: {{ $damagereduction }}</p>
+        <p>HP: {{$GetStats['hp'] }}</p>
+        <p>Damage: {{$GetStats['damage'] }}</p>
+        <p>Skill Damage: {{$GetStats['skilldamage']  }}</p>
+        <p>Damage Reduction: {{$GetStats['damagereduction']  }}</p>
         <p>
             @switch($class)
                 @case('Assassin')
@@ -56,7 +56,7 @@
                     {{ 'Mana: ' }}
                 @break
             @endswitch
-            {{ $ClassSpecial }}</p>
+            {{ $GetStats['ClassSpecial'] }}</p>
 
     </div>
     <div class="w-7/12 mt-5">
@@ -114,21 +114,35 @@
             </div>
         </div>
         <div class="flex mt-4">
-            <div class="w-1/6 h-1/6	border">
-                <p>Bag Slot</p>
-            </div>
-            <div class="w-1/6 h-1/6	border">
-                <p>Bag Slot</p>
-            </div>
-            <div class="w-1/6 h-1/6 	border">
-                <p>Bag Slot</p>
-            </div>
-            <div class="w-1/6 h-1/6 	border">
-                <p>Bag Slot</p>
-            </div>
-            <div class="w-1/6 h-1/6	border">
-                <p>Bag Slot</p>
-            </div>
-        </div>
+
+
+            @for ($i = 1; $i <= 5; $i++)
+                <div class="w-1/6 h-1/6	border">
+                    <p><?php $bagslot = 'bagslot' . strval($i); ?>
+
+                        ID: {{ $InventoryInfo->$bagslot }}
+                        @if ($InventoryInfo->$bagslot == '')
+                            Empty
+                        @endif
+                    </p>
+                </div>
+            @endfor
+
     </div>
+    <div class="flex mt-4">
+
+
+        @for ($i = 6; $i <= 10; $i++)
+            <div class="w-1/6 h-1/6	border">
+                <p><?php $bagslot = 'bagslot' . strval($i); ?>
+
+                    ID: {{ $InventoryInfo->$bagslot }}
+                    @if ($InventoryInfo->$bagslot == '')
+                        Empty
+                    @endif
+                </p>
+            </div>
+        @endfor
+
+</div>
 @endsection

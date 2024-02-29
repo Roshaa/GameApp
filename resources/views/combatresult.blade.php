@@ -14,7 +14,7 @@
         {{ 'images/paladinclass.jpg' }}
         @break
         @case('Warlock')
-        {{ 'images/warlock.jpg' }}
+        {{ 'images/warlockclass.jpg' }}
         @break
     @default    
 @endswitch">

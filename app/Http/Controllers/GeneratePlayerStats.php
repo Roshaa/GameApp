@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\PlayerInventory;
 
 
 class GeneratePlayerStats extends Controller
@@ -256,31 +257,23 @@ class GeneratePlayerStats extends Controller
 
         $playername = DB::table('USERS')->where('id', '=', $user_id)->value('name');
         $class = DB::table('user_characters')->where('user_id', '=', $user_id)->value('class');
+        $GetStats = GeneratePlayerStats::GenerateStats();
 
-        $getstats = GeneratePlayerStats::GenerateStats();
-        extract($getstats);
 
+        $InventoryInfo = PlayerInventory::find($user_id);
+        //Pode ser util para obter os valores dos items equipados
+        $teste=$InventoryInfo->bagslot1;
+        
+
+
+        
         return view(
             'playerprofile',
             [
                 'class' => $class,
                 'playername' => $playername,
-                'mainstat' => "$mainstat",
-                'Willpower' => "$Willpower",
-                'Constituion' => "$Constituion",
-                'Expertise' => "$Expertise",
-                'Resistance' => "$Resistance",
-                'Mastery' => "$Mastery",
-                'Alchemy' => "$Alchemy",
-                'Armoursmith' => "$Armoursmith",
-                'Weaponsmith' => "$Weaponsmith",
-                'Jewellery' => "$Jewellery",
-                'Librarian' => "$Librarian",
-                'hp' => "$hp",
-                'damage' => "$damage",
-                'skilldamage' => "$skilldamage",
-                'damagereduction' => "$damagereduction",
-                'ClassSpecial' => "$ClassSpecial",
+                'InventoryInfo'=>$InventoryInfo,
+                'GetStats'=>$GetStats
             ]
         );
     }

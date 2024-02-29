@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GeneratePlayerStats;
 use App\Http\Controllers\CombatPVE;
+use App\Http\Controllers\InventoryController;
 
 use Illuminate\Support\Facades\Route;
 use App\Models\User;

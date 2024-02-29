@@ -20,19 +20,19 @@ public static function missionitemgeneration(){
         //controlar com mob tier no futuro
         $itemrarityroll = rand(0, 99);
         switch ($itemrarityroll) {
-            case $itemrarityroll < 50:
+            case $itemrarityroll <= 50:
                 $itemrarityroll = 'common';
                 break;
 
-            case $itemrarityroll > 50 && $itemrarityroll < 80:
+            case $itemrarityroll > 51 && $itemrarityroll < 80:
                 $itemrarityroll = 'uncommon';
                 break;
 
-            case $itemrarityroll > 80 && $itemrarityroll < 95:
+            case $itemrarityroll > 81 && $itemrarityroll < 95:
                 $itemrarityroll = 'rare';
                 break;
 
-            case $itemrarityroll > 95:
+            case $itemrarityroll >= 95:
                 $itemrarityroll = 'epic';
                 break;
         }
@@ -138,8 +138,8 @@ public static function missionitemgeneration(){
                 break;
         }
 
-        //Terminar combate para warlock e paladin
-        //Adicionar a bag slot do jogador e validar o inventario
+
+        
         
 
         $Items->save();
