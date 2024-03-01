@@ -21,18 +21,16 @@ use Illuminate\Support\Facades\DB;
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/dashboard', function () {
-    return redirect('playerprofile');
-}); 
-Route::get('/profile', function () {
-    return view('profile.edit');
-});
-Route::get('/combatresult', function () {
-    return view('combatresult');
-})->name('combatresult');
+
+
+Route::get('/', function () {return view('welcome');});
+Route::get('/dashboard', function () {return redirect('playerprofile');}); 
+Route::get('/profile', function () {return view('profile.edit');});
+Route::get('/combatresult', function () {return view('combatresult');})->name('combatresult');
+
+
+
+
 
 //Class para o utilizador escolher, caso ja tenha escolhido redireciona para a sua profile
 Route::get('/chooseclass', function () {

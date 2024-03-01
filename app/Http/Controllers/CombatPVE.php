@@ -12,7 +12,6 @@ use App\Http\Controllers\AssassinCombat;
 use App\Http\Controllers\WarlockCombat;
 use App\Http\Controllers\PaladinCombat;
 
-use App\Models\Items;
 use App\Models\mobsmissions;
 use App\Models\UserCharacter;
 
@@ -63,9 +62,9 @@ class CombatPVE extends Controller
         while ($mobhp > 0 && $playerhp > 0) {
 
             $mobhp = $mobhp - $playerattack;
-            echo "$playerattack"."<br>";
+            echo "Player Attack: "."$playerattack"."<br>";
             $playerhp = $playerhp - $playerdefend;
-            echo "$playerdefend"."<br>";
+            echo "Player Defend: "."$playerdefend"."<br>";
         }
 
         $combatresult = [

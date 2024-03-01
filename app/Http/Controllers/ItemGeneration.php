@@ -48,7 +48,7 @@ public static function missionitemgeneration(){
 
 
 
-        /*Needs to me moved to item generation controller in the future
+        /*
             stat 1 -> main stat
             stat 2 -> Willpower
             stat 3 -> Constituion

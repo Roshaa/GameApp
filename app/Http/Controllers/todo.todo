@@ -1,0 +1,6 @@
+New Task:
+    ☐  Todas as Routes têm que passar a uma class function excepto as routes que tem um simples returnview
+    ☐  Form para equipar items que tem que ter uma validação se o id do item pertence aquele utilizador
+        PS: A solução para o route form chooseclass esta no email
+    ☐  Calcular stats perante os items equipados
+    ☐  Após isto comentar todo o codigo
