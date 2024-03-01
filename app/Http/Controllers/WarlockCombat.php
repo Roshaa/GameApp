@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 
 class WarlockCombat extends Controller
 {
+
+    //transportar turn na funcao para as futuras skills
+    //Combat de warlock, cada classe tem o seu porque podem ter atributos diferentes
     public static function WarlockAttack(){
 
         $gettruestats = GeneratePlayerStats::GenerateStats();

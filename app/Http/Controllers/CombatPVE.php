@@ -20,6 +20,8 @@ use App\Models\UserCharacter;
 
 class CombatPVE extends Controller
 {
+
+    //Isto é o combate (PVE) falta adicionar as habilidades e animações por segundo
     public static function combat($mobchosen)
     {
 
@@ -38,33 +40,35 @@ class CombatPVE extends Controller
         extract($getstats);
         $playerhp = "$hp";
 
-        switch ($class) {
-            case "Assassin":
 
-                $playerattack = AssassinCombat::AssassinAttack();
-                $playerdefend = AssassinCombat::AssassinDefend($mobdamage);
-
-                break;
-            case "Paladin":
-
-                $playerattack = PaladinCombat::PaladinAttack();
-                $playerdefend = PaladinCombat::PaladinDefend($mobdamage);
-
-                break;
-            case "Warlock":
-
-                $playerattack = WarlockCombat::WarlockAttack();
-                $playerdefend = WarlockCombat::WarlockDefend($mobdamage);
-
-                break;
-        }
 
         while ($mobhp > 0 && $playerhp > 0) {
+
+            switch ($class) {
+                case "Assassin":
+    
+                    $playerattack = AssassinCombat::AssassinAttack();
+                    $playerdefend = AssassinCombat::AssassinDefend($mobdamage);
+    
+                    break;
+                case "Paladin":
+    
+                    $playerattack = PaladinCombat::PaladinAttack();
+                    $playerdefend = PaladinCombat::PaladinDefend($mobdamage);
+    
+                    break;
+                case "Warlock":
+    
+                    $playerattack = WarlockCombat::WarlockAttack();
+                    $playerdefend = WarlockCombat::WarlockDefend($mobdamage);
+    
+                    break;
+            }
 
             $mobhp = $mobhp - $playerattack;
             echo "Player Attack: "."$playerattack"."<br>";
             $playerhp = $playerhp - $playerdefend;
-            echo "Player Defend: "."$playerdefend"."<br>";
+            echo "Player DamageTaken: "."$playerdefend"."<br>";
         }
 
         $combatresult = [

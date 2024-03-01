@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 class AssassinCombat extends Controller
 {
     //transportar turn na funcao para as futuras skills
+    //Combat de assassin, cada classe tem o seu porque podem ter atributos diferentes
     public static function AssassinAttack(){
 
         $gettruestats = GeneratePlayerStats::GenerateStats();
@@ -17,7 +18,7 @@ class AssassinCombat extends Controller
         $skilldamage = "$skilldamage";
         $ClassSpecial = "$ClassSpecial";
 
-        $critroll=rand(0,99);
+        $critroll=rand(1,100);
 
         $damagedealt= $damage;
         if($critroll <= $ClassSpecial ){

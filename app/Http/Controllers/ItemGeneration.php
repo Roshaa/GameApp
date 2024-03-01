@@ -10,6 +10,7 @@ use App\Models\UserCharacter;
 class ItemGeneration extends Controller
 {
 
+    //Gera um item aleatorio, na altura em que isto está ser escrito so funciona para os 3 mobs nas missoes
 public static function missionitemgeneration(){
 
     $user_id = Auth::user()->id;
@@ -24,11 +25,11 @@ public static function missionitemgeneration(){
                 $itemrarityroll = 'common';
                 break;
 
-            case $itemrarityroll > 51 && $itemrarityroll < 80:
+            case $itemrarityroll >= 51 && $itemrarityroll < 80:
                 $itemrarityroll = 'uncommon';
                 break;
 
-            case $itemrarityroll > 81 && $itemrarityroll < 95:
+            case $itemrarityroll >= 81 && $itemrarityroll < 95:
                 $itemrarityroll = 'rare';
                 break;
 

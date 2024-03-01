@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 
 class PaladinCombat extends Controller
 {
+
+    //transportar turn na funcao para as futuras skills
+    //Combat de paladin, cada classe tem o seu porque podem ter atributos diferentes
     public static function PaladinAttack(){
 
         $gettruestats = GeneratePlayerStats::GenerateStats();

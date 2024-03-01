@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\PlayerInventory;
+use App\Http\Requests\ChooseClassRequest;
+use App\Models\UserCharacter;
 
 
 class GeneratePlayerStats extends Controller
@@ -251,6 +253,7 @@ class GeneratePlayerStats extends Controller
 
         return $truestats;
     }
+    //Recebe valores bases das classes mais os itens e obtem os valores para colocar na playerprofile
     public static function returnprofilewithstats()
     {
         $user_id = Auth::user()->id;
@@ -259,13 +262,9 @@ class GeneratePlayerStats extends Controller
         $class = DB::table('user_characters')->where('user_id', '=', $user_id)->value('class');
         $GetStats = GeneratePlayerStats::GenerateStats();
 
-
         $InventoryInfo = PlayerInventory::find($user_id);
         //Pode ser util para obter os valores dos items equipados
         $teste=$InventoryInfo->bagslot1;
-        
-
-
         
         return view(
             'playerprofile',
@@ -277,4 +276,31 @@ class GeneratePlayerStats extends Controller
             ]
         );
     }
+
+    //Recebe o post de quando se escolhe a class na view chooseclass
+    public static function submitplayerclass(ChooseClassRequest $request)
+    {
+        $optionvalue=$request->Class;
+        $user_id= Auth::user()->id;
+    
+    
+        $UserChar=$request->validated();
+    
+        $UserChar = new UserCharacter;
+        $UserChar->user_id= $user_id;
+        $UserChar->class=$optionvalue;
+        $UserChar->level=1;
+    
+        $UserChar->save();
+    
+        $playerinventory = new playerinventory;
+        $playerinventory->user_id= $user_id;  
+        $playerinventory->save();
+    
+        return redirect()->route('playerprofile');
+    
+    }
+
+
+
 }
