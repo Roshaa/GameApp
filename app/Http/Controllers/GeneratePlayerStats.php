@@ -6,9 +6,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\PlayerInventory;
+use App\Models\Items;
 use App\Http\Requests\ChooseClassRequest;
 use App\Models\UserCharacter;
-
+use PhpParser\Node\Stmt\For_;
 
 class GeneratePlayerStats extends Controller
 {
@@ -262,17 +263,33 @@ class GeneratePlayerStats extends Controller
         $class = DB::table('user_characters')->where('user_id', '=', $user_id)->value('class');
         $GetStats = GeneratePlayerStats::GenerateStats();
 
-        $InventoryInfo = PlayerInventory::find($user_id);
-        //Pode ser util para obter os valores dos items equipados
-        $teste=$InventoryInfo->bagslot1;
+        $Inventoryid=PlayerInventory::where('user_id', '=', $user_id)->value('id');
+        $InventoryInfo= PlayerInventory::find($Inventoryid);
+
+        $BagItemsArray=[
+
+        ];
         
+        for ($i=0;$i<=10;$i++){
+
+            $bagslot = 'bagslot' . strval($i);
+            $ItemId=$InventoryInfo->$bagslot;
+            $ItemInfo=Items::find($ItemId);
+            array_push($BagItemsArray,$ItemInfo);
+
+        };
+  
+
+        //POSSIVELMENTE ALTERAR DEPOIS AS VARIAVEIS DAS BAGSLOTSINFO
+
+
         return view(
             'playerprofile',
             [
                 'class' => $class,
                 'playername' => $playername,
-                'InventoryInfo'=>$InventoryInfo,
-                'GetStats'=>$GetStats
+                'GetStats'=>$GetStats,
+                'BagItemsArray'=>$BagItemsArray
             ]
         );
     }
@@ -301,6 +318,22 @@ class GeneratePlayerStats extends Controller
     
     }
 
+    public static function verifyavailablebagslot(){
+        for($i= 1; $i <=10; $i++){
 
+            $user_id = Auth::user()->id;
+            $bagslotstring='bagslot' . strval($i);
+            $verifyempty=PlayerInventory::where('user_id', '=', $user_id)->value($bagslotstring);
+
+            if($verifyempty==''){
+            return $bagslotstring;
+            }
+
+            if($verifyempty!= '' && $i==10){
+            return $bagslotstring='FullBag';
+            }     
+        
+        }
+    }
 
 }

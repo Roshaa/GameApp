@@ -24,24 +24,24 @@
     </div>
     <div class="w-2/12 mt-5">
 
-        <p>Main stat: {{$GetStats['mainstat']  }}</p>
+        <p>Main stat: {{ $GetStats['mainstat'] }}</p>
         <br>
-        <p>Willpower: {{$GetStats['Willpower']  }}</p>
-        <p>Constituion: {{$GetStats['Constituion']  }}</p>
-        <p>Expertise: {{$GetStats['Expertise']  }}</p>
-        <p>Resistance: {{$GetStats['Resistance'] }}</p>
-        <p>Mastery: {{$GetStats['Mastery']  }}</p>
+        <p>Willpower: {{ $GetStats['Willpower'] }}</p>
+        <p>Constituion: {{ $GetStats['Constituion'] }}</p>
+        <p>Expertise: {{ $GetStats['Expertise'] }}</p>
+        <p>Resistance: {{ $GetStats['Resistance'] }}</p>
+        <p>Mastery: {{ $GetStats['Mastery'] }}</p>
         <br>
-        <p>Alchemy: {{$GetStats['Alchemy']  }}</p>
-        <p>Armoursmith: {{$GetStats['Armoursmith']  }}</p>
-        <p>Weaponsmith: {{$GetStats['Weaponsmith']  }}</p>
-        <p>Jewellery: {{$GetStats['Jewellery']  }}</p>
-        <p>Librarian {{$GetStats['Librarian']  }}</p>
+        <p>Alchemy: {{ $GetStats['Alchemy'] }}</p>
+        <p>Armoursmith: {{ $GetStats['Armoursmith'] }}</p>
+        <p>Weaponsmith: {{ $GetStats['Weaponsmith'] }}</p>
+        <p>Jewellery: {{ $GetStats['Jewellery'] }}</p>
+        <p>Librarian {{ $GetStats['Librarian'] }}</p>
         <br>
-        <p>HP: {{$GetStats['hp'] }}</p>
-        <p>Damage: {{$GetStats['damage'] }}</p>
-        <p>Skill Damage: {{$GetStats['skilldamage']  }}</p>
-        <p>Damage Reduction: {{$GetStats['damagereduction']  }}</p>
+        <p>HP: {{ $GetStats['hp'] }}</p>
+        <p>Damage: {{ $GetStats['damage'] }}</p>
+        <p>Skill Damage: {{ $GetStats['skilldamage'] }}</p>
+        <p>Damage Reduction: {{ $GetStats['damagereduction'] }}</p>
         <p>
             @switch($class)
                 @case('Assassin')
@@ -113,36 +113,57 @@
                 <p>Potion</p>
             </div>
         </div>
-        <div class="flex mt-4">
+        <div class="mt-4">
 
-
+            {{-- Alterar para uma table no futuro --}}
             @for ($i = 1; $i <= 5; $i++)
-                <div class="w-1/6 h-1/6	border">
-                    <p><?php $bagslot = 'bagslot' . strval($i); ?>
-
-                        ID: {{ $InventoryInfo->$bagslot }}
-                        @if ($InventoryInfo->$bagslot == '')
-                            Empty
-                        @endif
+                <div class="w-full border mt-1">
+                    <p>
+                        @isset($BagItemsArray[$i])
+                            ID: {{ $BagItemsArray[$i]->id }}
+                            Main Stat: {{ $BagItemsArray[$i]->stat1 }}
+                            STAT2: {{ $BagItemsArray[$i]->stat2 }}
+                            STAT3: {{ $BagItemsArray[$i]->stat3 }}
+                            STAT4: {{ $BagItemsArray[$i]->stat4 }}
+                            STAT5: {{ $BagItemsArray[$i]->stat5 }}
+                            STAT6: {{ $BagItemsArray[$i]->stat6 }}
+                            Armor: {{ $BagItemsArray[$i]->armor }}
+                            SE1: {{ $BagItemsArray[$i]->specialeffect1 }}
+                            SE2: {{ $BagItemsArray[$i]->specialeffect2 }}
+                            SE3: {{ $BagItemsArray[$i]->specialeffect3 }}
+                            SE4: {{ $BagItemsArray[$i]->specialeffect4 }}
+                            Type: {{ $BagItemsArray[$i]->type }}
+                            Rarity: {{ $BagItemsArray[$i]->rarity }}
+                        @endisset
                     </p>
                 </div>
             @endfor
 
-    </div>
-    <div class="flex mt-4">
 
+{{-- Tem que se criar a form e um botao delete que mete o valor null(pesquisar) --}}
 
-        @for ($i = 6; $i <= 10; $i++)
-            <div class="w-1/6 h-1/6	border">
-                <p><?php $bagslot = 'bagslot' . strval($i); ?>
+            @for ($i = 6; $i <= 10; $i++)
+                <div class="w-full border mt-1">
+                    <p>
+                        @isset($BagItemsArray[$i])
+                            ID: {{ $BagItemsArray[$i]->id }}
+                            Main Stat: {{ $BagItemsArray[$i]->stat1 }}
+                            STAT2: {{ $BagItemsArray[$i]->stat2 }}
+                            STAT3: {{ $BagItemsArray[$i]->stat3 }}
+                            STAT4: {{ $BagItemsArray[$i]->stat4 }}
+                            STAT5: {{ $BagItemsArray[$i]->stat5 }}
+                            STAT6: {{ $BagItemsArray[$i]->stat6 }}
+                            Armor: {{ $BagItemsArray[$i]->armor }}
+                            SE1: {{ $BagItemsArray[$i]->specialeffect1 }}
+                            SE2: {{ $BagItemsArray[$i]->specialeffect2 }}
+                            SE3: {{ $BagItemsArray[$i]->specialeffect3 }}
+                            SE4: {{ $BagItemsArray[$i]->specialeffect4 }}
+                            Type: {{ $BagItemsArray[$i]->type }}
+                            Rarity: {{ $BagItemsArray[$i]->rarity }}
+                        @endisset
+                    </p>
+                </div>
+            @endfor
 
-                    ID: {{ $InventoryInfo->$bagslot }}
-                    @if ($InventoryInfo->$bagslot == '')
-                        Empty
-                    @endif
-                </p>
-            </div>
-        @endfor
-
-</div>
-@endsection
+        </div>
+    @endsection

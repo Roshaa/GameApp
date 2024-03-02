@@ -1,5 +1,6 @@
 New Task:
-
-    ☐  Form para equipar items que tem que ter uma validação se o id do item pertence aquele utilizador
+    ☐  Todos os item types
+    ☐  Form para equipar items, que tem que ter uma validação se o id do item pertence aquele utilizador
+        Falta colocar o post na playerprofile pois ja retrieve toda a informação dos items
         PS: A solução para o route form chooseclass esta no email
     ☐  Calcular stats perante os items equipados

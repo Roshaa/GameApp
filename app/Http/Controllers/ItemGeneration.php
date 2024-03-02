@@ -3,14 +3,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\GeneratePlayerStats;
+
 
 use App\Models\Items;
 use App\Models\UserCharacter;
+use App\Models\PlayerInventory;
+
 
 class ItemGeneration extends Controller
 {
 
-    //Gera um item aleatorio, na altura em que isto está ser escrito so funciona para os 3 mobs nas missoes
+    //Gera um item aleatorio e grava no inventario do jogador, na altura em que isto está ser escrito so funciona para os 3 mobs nas missoes
 public static function missionitemgeneration(){
 
     $user_id = Auth::user()->id;
@@ -75,8 +79,6 @@ public static function missionitemgeneration(){
         $dbrandomstatstring2 ='stat'.strval($getrandomstattofill2);
         $dbrandomstatstring3 ='stat'.strval($getrandomstattofill3);
 
-
-
         switch ($getrandomarmortype) {
             case $getrandomarmortype == 1:
                 $armortype = 'Head';
@@ -95,8 +97,6 @@ public static function missionitemgeneration(){
         $Items =new Items;
         $Items->user_owner_id = $user_id;
         $Items->itemname = 'NoName';
-
-
 
         switch ($itemrarityroll) {
             case $itemrarityroll == 'common':
@@ -139,10 +139,17 @@ public static function missionitemgeneration(){
                 break;
         }
 
+        $Inventoryid=PlayerInventory::where('user_id', '=', $user_id)->value('id');
+        $PlayerInventory= PlayerInventory::find($Inventoryid);    
+        $LastItem=Items::where('user_owner_id', '=', $user_id)->orderBy('id', 'desc')->first();
+        $bagslotstring=GeneratePlayerStats::verifyavailablebagslot();
 
-        
-        
-
+        if($bagslotstring != 'FullBag'){
         $Items->save();
+        $PlayerInventory->$bagslotstring=$LastItem->id;
+        $PlayerInventory->save();
+        }
+
+
     }
 }
