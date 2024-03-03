@@ -1,4 +1,5 @@
-<?php  
+<?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
@@ -15,13 +16,14 @@ class ItemGeneration extends Controller
 {
 
     //Gera um item aleatorio e grava no inventario do jogador, na altura em que isto está ser escrito so funciona para os 3 mobs nas missoes
-public static function missionitemgeneration(){
+    public static function missionitemgeneration()
+    {
 
-    $user_id = Auth::user()->id;
-    $class = UserCharacter::where('user_id', '=', $user_id)->value('class');
-    $level = UserCharacter::where('user_id', '=', $user_id)->value('level');
+        $user_id = Auth::user()->id;
+        $class = UserCharacter::where('user_id', '=', $user_id)->value('class');
+        $level = UserCharacter::where('user_id', '=', $user_id)->value('level');
 
-//1 common, 2 uncommon, 3 rare, 4 epic
+        //1 common, 2 uncommon, 3 rare, 4 epic
         //controlar com mob tier no futuro
         $itemrarityroll = rand(0, 99);
         switch ($itemrarityroll) {
@@ -44,14 +46,12 @@ public static function missionitemgeneration(){
 
 
         //é necessario controlar o item generation perante o tipo de item, no momento que isto esta a ser escrito só da para generar armor
-        function getrandomstatvalue($level) {
+        function getrandomstatvalue($level)
+        {
             return rand($level * 3.5, $level * 6);
         }
-        $getrandomarmorvalue = rand($level * 30, $level * 50);
-        $getrandomarmortype = rand(1, 4);
 
-
-
+        $getrandomitemtype = rand(1, 7);
 
         /*
             stat 1 -> main stat
@@ -64,92 +64,129 @@ public static function missionitemgeneration(){
 
 
         //necessario optimizar depois
-        $randomstatsarray= [2,3,4,5,6];
-        $getrandomstattofill1=$randomstatsarray[rand(0,4)];
-        $getrandomstattofill2=$randomstatsarray[rand(0,4)];
-        while ($getrandomstattofill2==$getrandomstattofill1){
-            $getrandomstattofill2=$randomstatsarray[rand(0,4)];
+        $randomstatsarray = [2, 3, 4, 5, 6];
+        $getrandomstattofill1 = $randomstatsarray[rand(0, 4)];
+        $getrandomstattofill2 = $randomstatsarray[rand(0, 4)];
+        while ($getrandomstattofill2 == $getrandomstattofill1) {
+            $getrandomstattofill2 = $randomstatsarray[rand(0, 4)];
         }
-        $getrandomstattofill3=$randomstatsarray[rand(0,4)];
-        while ($getrandomstattofill3==$getrandomstattofill2){
-            $getrandomstattofill3=$randomstatsarray[rand(0,4)];
-        }
-
-        $dbrandomstatstring1 ='stat'.strval($getrandomstattofill1);
-        $dbrandomstatstring2 ='stat'.strval($getrandomstattofill2);
-        $dbrandomstatstring3 ='stat'.strval($getrandomstattofill3);
-
-        switch ($getrandomarmortype) {
-            case $getrandomarmortype == 1:
-                $armortype = 'Head';
-                break;
-            case $getrandomarmortype == 2:
-                $armortype = 'Chest';
-                break;
-            case $getrandomarmortype == 3:
-                $armortype = 'Gloves';
-                break;
-            case $getrandomarmortype == 4:
-                $armortype = 'Boots';
-                break;
+        $getrandomstattofill3 = $randomstatsarray[rand(0, 4)];
+        while ($getrandomstattofill3 == $getrandomstattofill2) {
+            $getrandomstattofill3 = $randomstatsarray[rand(0, 4)];
         }
 
-        $Items =new Items;
+        $dbrandomstatstring1 = 'stat' . strval($getrandomstattofill1);
+        $dbrandomstatstring2 = 'stat' . strval($getrandomstattofill2);
+        $dbrandomstatstring3 = 'stat' . strval($getrandomstattofill3);
+
+        switch ($getrandomitemtype) {
+            case $getrandomitemtype == 1:
+                $itemtype = 'Head';
+                break;
+            case $getrandomitemtype == 2:
+                $itemtype = 'Chest';
+                break;
+            case $getrandomitemtype == 3:
+                $itemtype = 'Gloves';
+                break;
+            case $getrandomitemtype == 4:
+                $itemtype = 'Boots';
+                break;
+            case $getrandomitemtype == 5:
+                $itemtype = 'ProfessionTool';
+                break;
+            case $getrandomitemtype == 6:
+                $itemtype = 'Ring';
+                break;
+            case $getrandomitemtype == 7:
+                $itemtype = 'Weapon';
+                break;
+                /*
+
+            //Por desenvolver
+            case $getrandomitemtype == 8:
+                $itemtype = 'Relic';
+                break;
+            case $getrandomitemtype == 9:
+                $itemtype = 'Potion';
+                break;*/
+        }
+
+        $Items = new Items;
         $Items->user_owner_id = $user_id;
         $Items->itemname = 'NoName';
+        $Items->type = $itemtype;
+        $Items->rarity = $itemrarityroll;
+
+        if ($itemtype == 'Head' || $itemtype == 'Chest' || $itemtype == 'Gloves' || $itemtype == 'Boots') {
+            $Items->armor = rand($level * 30, $level * 50);
+        }
+        if ($itemtype == 'Weapon') {
+            $Items->damage = rand($level * 15, $level * 25);
+        }
+
+
 
         switch ($itemrarityroll) {
             case $itemrarityroll == 'common':
 
-                $Items->armor = $getrandomarmorvalue;
-                $Items->stat1 = getrandomstatvalue($level);
-                $Items->type=$armortype;
-                $Items->rarity=$itemrarityroll;
-
+                if ($itemtype == 'Weapon') {
+                    $Items->stat1 = getrandomstatvalue($level) * 2;
+                } else if ($itemtype == 'ProfessionTool') {
+                    $Items->$dbrandomstatstring1 = getrandomstatvalue($level) * 2;
+                } else {
+                    $Items->stat1 = getrandomstatvalue($level);
+                }
                 break;
             case $itemrarityroll == 'uncommon':
 
-                $Items->armor = $getrandomarmorvalue;
-                $Items->stat1 = getrandomstatvalue($level);
-                $Items->$dbrandomstatstring1=getrandomstatvalue($level);
-                $Items->type=$armortype;
-                $Items->rarity=$itemrarityroll;
-
+                if ($itemtype == 'Weapon') {
+                    $Items->stat1 = getrandomstatvalue($level) * 2.3;
+                } else if ($itemtype == 'ProfessionTool') {
+                    $Items->$dbrandomstatstring1 = getrandomstatvalue($level) * 2.3;
+                } else {
+                    $Items->stat1 = getrandomstatvalue($level);
+                    $Items->$dbrandomstatstring1 = getrandomstatvalue($level);
+                }
                 break;
             case $itemrarityroll == 'rare':
 
-                $Items->armor = $getrandomarmorvalue;
-                $Items->stat1 = getrandomstatvalue($level);
-                $Items->$dbrandomstatstring1=getrandomstatvalue($level);
-                $Items->$dbrandomstatstring2=getrandomstatvalue($level);
-                $Items->type=$armortype;
-                $Items->rarity=$itemrarityroll;
+                if ($itemtype == 'Weapon') {
+                    $Items->stat1 = getrandomstatvalue($level) * 2.6;
+                } else if ($itemtype == 'ProfessionTool') {
+                    $Items->$dbrandomstatstring1 = getrandomstatvalue($level) * 2.6;
+                } else {
+                    $Items->stat1 = getrandomstatvalue($level);
+                    $Items->$dbrandomstatstring1 = getrandomstatvalue($level);
+                    $Items->$dbrandomstatstring2 = getrandomstatvalue($level);
 
+                }
                 break;
             case $itemrarityroll == 'epic':
 
-                $Items->armor = $getrandomarmorvalue;
-                $Items->stat1 = getrandomstatvalue($level);
-                $Items->$dbrandomstatstring1=getrandomstatvalue($level);
-                $Items->$dbrandomstatstring2=getrandomstatvalue($level);
-                $Items->$dbrandomstatstring3=getrandomstatvalue($level);
+                if ($itemtype == 'Weapon') {
+                    $Items->stat1 = getrandomstatvalue($level) * 3;
+                } else if ($itemtype == 'ProfessionTool') {
+                    $Items->$dbrandomstatstring1 = getrandomstatvalue($level) * 3;
+                } else {
+                    $Items->stat1 = getrandomstatvalue($level);
+                    $Items->$dbrandomstatstring1 = getrandomstatvalue($level);
+                    $Items->$dbrandomstatstring2 = getrandomstatvalue($level);
+                    $Items->$dbrandomstatstring3 = getrandomstatvalue($level);
+                }
 
-                $Items->type=$armortype;
-                $Items->rarity=$itemrarityroll;
                 break;
         }
 
-        $Inventoryid=PlayerInventory::where('user_id', '=', $user_id)->value('id');
-        $PlayerInventory= PlayerInventory::find($Inventoryid);    
-        $LastItem=Items::where('user_owner_id', '=', $user_id)->orderBy('id', 'desc')->first();
-        $bagslotstring=GeneratePlayerStats::verifyavailablebagslot();
+        $Inventoryid = PlayerInventory::where('user_id', '=', $user_id)->value('id');
+        $PlayerInventory = PlayerInventory::find($Inventoryid);
+        $LastItem = Items::where('user_owner_id', '=', $user_id)->orderBy('id', 'desc')->first();
+        $bagslotstring = GeneratePlayerStats::verifyavailablebagslot();
 
-        if($bagslotstring != 'FullBag'){
-        $Items->save();
-        $PlayerInventory->$bagslotstring=$LastItem->id;
-        $PlayerInventory->save();
+        if ($bagslotstring != 'FullBag') {
+            $Items->save();
+            $PlayerInventory->$bagslotstring = $LastItem->id;
+            $PlayerInventory->save();
         }
-
-
     }
 }

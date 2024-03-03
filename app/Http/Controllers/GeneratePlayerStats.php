@@ -318,7 +318,8 @@ class GeneratePlayerStats extends Controller
     
     }
 
-    public static function verifyavailablebagslot(){
+    public static function verifyavailablebagslot()
+    {
         for($i= 1; $i <=10; $i++){
 
             $user_id = Auth::user()->id;
@@ -334,6 +335,15 @@ class GeneratePlayerStats extends Controller
             }     
         
         }
+    }
+    public static function equipitem()
+    {
+
+
+        //Receber post de equipar item
+
+
+
     }
 
 }
