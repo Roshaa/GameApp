@@ -1,6 +1,8 @@
 New Task:
     ☐  Todos os item types
-    ☐  Form para equipar items, que tem que ter uma validação se o id do item pertence aquele utilizador
-        Falta colocar o post na playerprofile pois ja retrieve toda a informação dos items
-        PS: A solução para o route form chooseclass esta no email
+
+    ☐  Não permitir items equipados em duplicado(tools e ring)
+    ☐  Retirar o item da bagslot quando equipado
+    ☐  Desiquipar item e voltar para uma das bagslots
+    
     ☐  Calcular stats perante os items equipados

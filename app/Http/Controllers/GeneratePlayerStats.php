@@ -8,8 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Models\PlayerInventory;
 use App\Models\Items;
 use App\Http\Requests\ChooseClassRequest;
+use App\Http\Requests\InventoryItemsRequest;
 use App\Models\UserCharacter;
-use PhpParser\Node\Stmt\For_;
+
 
 class GeneratePlayerStats extends Controller
 {
@@ -22,7 +23,7 @@ class GeneratePlayerStats extends Controller
         $level = DB::table('user_characters')->where('user_id', '=', $user_id)->value('level');
 
         switch ($class) {
-            //stats base de cada classe
+                //stats base de cada classe
             case 'Assassin':
 
                 $statsarray = [
@@ -145,72 +146,72 @@ class GeneratePlayerStats extends Controller
 
         //Isto retorna os verdadeiros valores do jogador perante a class,nivel,talentos,equipamento etc
         switch ($class) {
-            
-            //Cada classe tem propriedades unicas e valores unicos portanto para ja fica assim em switches
-            //No futuro cada Classe podera ter a sua class em codigo
-            case 'Assassin':
-            
-                $hp = $statsarray[11] + ($level * 10 + $Constituion * 5);
-                $damage = $statsarray[12]+$mainstat/2;
-                $skilldamage=100+$Willpower+($Mastery/3);
 
-                $damagereduction= $Resistance+($Mastery/3)/$level;
-                
+                //Cada classe tem propriedades unicas e valores unicos portanto para ja fica assim em switches
+                //No futuro cada Classe podera ter a sua class em codigo
+            case 'Assassin':
+
+                $hp = $statsarray[11] + ($level * 10 + $Constituion * 5);
+                $damage = $statsarray[12] + $mainstat / 2;
+                $skilldamage = 100 + $Willpower + ($Mastery / 3);
+
+                $damagereduction = $Resistance + ($Mastery / 3) / $level;
+
                 //Critical strike for assassin
                 //Base 20%
-                $ClassSpecial = 20+$Expertise+($Mastery/3)/$level;
+                $ClassSpecial = 20 + $Expertise + ($Mastery / 3) / $level;
 
-                $truestats=[
+                $truestats = [
 
-                'mainstat'=>$mainstat,
-                'Willpower'=>$Willpower,
-                'Constituion'=>$Constituion,
-                'Expertise'=>$Expertise,
-                'Resistance'=>$Resistance,
-                'Mastery'=>$Mastery,
-                'Alchemy'=>$Alchemy,
-                'Armoursmith'=>$Armoursmith,
-                'Weaponsmith'=>$Weaponsmith,
-                'Jewellery'=>$Jewellery,
-                'Librarian'=>$Librarian,
-                'hp'=>$hp,
-                'damage'=>$damage,
-                'skilldamage'=>$skilldamage,
-                'damagereduction'=>$damagereduction,
-                'ClassSpecial'=>$ClassSpecial
+                    'mainstat' => $mainstat,
+                    'Willpower' => $Willpower,
+                    'Constituion' => $Constituion,
+                    'Expertise' => $Expertise,
+                    'Resistance' => $Resistance,
+                    'Mastery' => $Mastery,
+                    'Alchemy' => $Alchemy,
+                    'Armoursmith' => $Armoursmith,
+                    'Weaponsmith' => $Weaponsmith,
+                    'Jewellery' => $Jewellery,
+                    'Librarian' => $Librarian,
+                    'hp' => $hp,
+                    'damage' => $damage,
+                    'skilldamage' => $skilldamage,
+                    'damagereduction' => $damagereduction,
+                    'ClassSpecial' => $ClassSpecial
 
                 ];
                 break;
             case 'Paladin':
 
                 $hp = $statsarray[11] + ($level * 10 + $Constituion * 5);
-                $damage = $statsarray[12]+$mainstat/2;
-                $skilldamage=100+$Willpower+($Mastery/3);
+                $damage = $statsarray[12] + $mainstat / 2;
+                $skilldamage = 100 + $Willpower + ($Mastery / 3);
 
-                $damagereduction= $Resistance+($Mastery/3)/$level;
-                
+                $damagereduction = $Resistance + ($Mastery / 3) / $level;
+
                 //Self Heal Paladin
                 //Base 1%
-                $ClassSpecial = 1+($Expertise+($Mastery/3)/20)-($level*0.05);
+                $ClassSpecial = 1 + ($Expertise + ($Mastery / 3) / 20) - ($level * 0.05);
 
-                $truestats=[
+                $truestats = [
 
-                'mainstat'=>$mainstat,
-                'Willpower'=>$Willpower,
-                'Constituion'=>$Constituion,
-                'Expertise'=>$Expertise,
-                'Resistance'=>$Resistance,
-                'Mastery'=>$Mastery,
-                'Alchemy'=>$Alchemy,
-                'Armoursmith'=>$Armoursmith,
-                'Weaponsmith'=>$Weaponsmith,
-                'Jewellery'=>$Jewellery,
-                'Librarian'=>$Librarian,
-                'hp'=>$hp,
-                'damage'=>$damage,
-                'skilldamage'=>$skilldamage,
-                'damagereduction'=>$damagereduction,
-                'ClassSpecial'=>$ClassSpecial
+                    'mainstat' => $mainstat,
+                    'Willpower' => $Willpower,
+                    'Constituion' => $Constituion,
+                    'Expertise' => $Expertise,
+                    'Resistance' => $Resistance,
+                    'Mastery' => $Mastery,
+                    'Alchemy' => $Alchemy,
+                    'Armoursmith' => $Armoursmith,
+                    'Weaponsmith' => $Weaponsmith,
+                    'Jewellery' => $Jewellery,
+                    'Librarian' => $Librarian,
+                    'hp' => $hp,
+                    'damage' => $damage,
+                    'skilldamage' => $skilldamage,
+                    'damagereduction' => $damagereduction,
+                    'ClassSpecial' => $ClassSpecial
 
                 ];
 
@@ -218,33 +219,33 @@ class GeneratePlayerStats extends Controller
             case 'Warlock':
 
                 $hp = $statsarray[11] + ($level * 10 + $Constituion * 5);
-                $damage = $statsarray[12]+$mainstat/2;
-                $skilldamage=100+$Willpower+($Mastery/3);
+                $damage = $statsarray[12] + $mainstat / 2;
+                $skilldamage = 100 + $Willpower + ($Mastery / 3);
 
-                $damagereduction= $Resistance+($Mastery/3)/$level;
-                
+                $damagereduction = $Resistance + ($Mastery / 3) / $level;
+
                 //Mana
                 //Base 100
-                $ClassSpecial = 100+(($Expertise+($Mastery/3))*3)/$level;
+                $ClassSpecial = 100 + (($Expertise + ($Mastery / 3)) * 3) / $level;
 
-                $truestats=[
+                $truestats = [
 
-                'mainstat'=>$mainstat,
-                'Willpower'=>$Willpower,
-                'Constituion'=>$Constituion,
-                'Expertise'=>$Expertise,
-                'Resistance'=>$Resistance,
-                'Mastery'=>$Mastery,
-                'Alchemy'=>$Alchemy,
-                'Armoursmith'=>$Armoursmith,
-                'Weaponsmith'=>$Weaponsmith,
-                'Jewellery'=>$Jewellery,
-                'Librarian'=>$Librarian,
-                'hp'=>$hp,
-                'damage'=>$damage,
-                'skilldamage'=>$skilldamage,
-                'damagereduction'=>$damagereduction,
-                'ClassSpecial'=>$ClassSpecial
+                    'mainstat' => $mainstat,
+                    'Willpower' => $Willpower,
+                    'Constituion' => $Constituion,
+                    'Expertise' => $Expertise,
+                    'Resistance' => $Resistance,
+                    'Mastery' => $Mastery,
+                    'Alchemy' => $Alchemy,
+                    'Armoursmith' => $Armoursmith,
+                    'Weaponsmith' => $Weaponsmith,
+                    'Jewellery' => $Jewellery,
+                    'Librarian' => $Librarian,
+                    'hp' => $hp,
+                    'damage' => $damage,
+                    'skilldamage' => $skilldamage,
+                    'damagereduction' => $damagereduction,
+                    'ClassSpecial' => $ClassSpecial
 
                 ];
 
@@ -263,33 +264,28 @@ class GeneratePlayerStats extends Controller
         $class = DB::table('user_characters')->where('user_id', '=', $user_id)->value('class');
         $GetStats = GeneratePlayerStats::GenerateStats();
 
-        $Inventoryid=PlayerInventory::where('user_id', '=', $user_id)->value('id');
-        $InventoryInfo= PlayerInventory::find($Inventoryid);
+        $Inventoryid = PlayerInventory::where('user_id', '=', $user_id)->value('id');
+        $InventoryInfo = PlayerInventory::find($Inventoryid);
 
-        $BagItemsArray=[
+        $BagItemsArray = [];
 
-        ];
-        
-        for ($i=0;$i<=10;$i++){
+        for ($i = 0; $i <= 10; $i++) {
 
             $bagslot = 'bagslot' . strval($i);
-            $ItemId=$InventoryInfo->$bagslot;
-            $ItemInfo=Items::find($ItemId);
-            array_push($BagItemsArray,$ItemInfo);
-
+            $ItemId = $InventoryInfo->$bagslot;
+            $ItemInfo = Items::find($ItemId);
+            array_push($BagItemsArray, $ItemInfo);
         };
-  
 
         //POSSIVELMENTE ALTERAR DEPOIS AS VARIAVEIS DAS BAGSLOTSINFO
-
 
         return view(
             'playerprofile',
             [
                 'class' => $class,
                 'playername' => $playername,
-                'GetStats'=>$GetStats,
-                'BagItemsArray'=>$BagItemsArray
+                'GetStats' => $GetStats,
+                'BagItemsArray' => $BagItemsArray
             ]
         );
     }
@@ -297,53 +293,113 @@ class GeneratePlayerStats extends Controller
     //Recebe o post de quando se escolhe a class na view chooseclass
     public static function submitplayerclass(ChooseClassRequest $request)
     {
-        $optionvalue=$request->Class;
-        $user_id= Auth::user()->id;
-    
-    
-        $UserChar=$request->validated();
-    
+        $optionvalue = $request->Class;
+        $user_id = Auth::user()->id;
+
+
+        $UserChar = $request->validated();
+
         $UserChar = new UserCharacter;
-        $UserChar->user_id= $user_id;
-        $UserChar->class=$optionvalue;
-        $UserChar->level=1;
-    
+        $UserChar->user_id = $user_id;
+        $UserChar->class = $optionvalue;
+        $UserChar->level = 1;
+
         $UserChar->save();
-    
+
         $playerinventory = new playerinventory;
-        $playerinventory->user_id= $user_id;  
+        $playerinventory->user_id = $user_id;
         $playerinventory->save();
-    
+
         return redirect()->route('playerprofile');
-    
     }
 
     public static function verifyavailablebagslot()
     {
-        for($i= 1; $i <=10; $i++){
+        for ($i = 1; $i <= 10; $i++) {
 
             $user_id = Auth::user()->id;
-            $bagslotstring='bagslot' . strval($i);
-            $verifyempty=PlayerInventory::where('user_id', '=', $user_id)->value($bagslotstring);
+            $bagslotstring = 'bagslot' . strval($i);
+            $verifyempty = PlayerInventory::where('user_id', '=', $user_id)->value($bagslotstring);
 
-            if($verifyempty==''){
-            return $bagslotstring;
+            if ($verifyempty == '') {
+                return $bagslotstring;
             }
 
-            if($verifyempty!= '' && $i==10){
-            return $bagslotstring='FullBag';
-            }     
-        
+            if ($verifyempty != '' && $i == 10) {
+                return $bagslotstring = 'FullBag';
+            }
         }
     }
-    public static function equipitem()
+    public static function equipitem(InventoryItemsRequest $request)
     {
 
+        $itemtoequip=$request->Equip;
+        $user_id = Auth::user()->id;
+        $verifyownership=Items::where('user_owner_id', '=', $user_id)->value('user_owner_id');
+        $Inventoryid = PlayerInventory::where('user_id', '=', $user_id)->value('id');
+        $playerinventory = PlayerInventory::find($Inventoryid);
+        $itemtype = Items::where('id', '=', $itemtoequip)->value('type');
 
-        //Receber post de equipar item
+        
+
+
+        if ($user_id == $verifyownership) {
+
+            switch ($itemtype) {
+                case 'Head':
+                    $playerinventory->equipslot1 = $itemtoequip;
+                    break;
+                case 'Chest':
+                    $playerinventory->equipslot2 = $itemtoequip;
+                    break;
+                case 'Gloves':
+                    $playerinventory->equipslot3 = $itemtoequip;
+                    break;
+                case 'Boots':
+                    $playerinventory->equipslot4 = $itemtoequip;
+                    break;
+                case 'Weapon':
+                    $playerinventory->equipslot5 = $itemtoequip;
+                    break;
+                case 'ProfessionTool':
+
+                    for ($i = 6; $i <= 7; $i++) {
+
+                        $user_id = Auth::user()->id;
+                        $equipslot = 'equipslot' . strval($i);
+                        $verifyempty = PlayerInventory::where('user_id', '=', $user_id)->value($equipslot);
+            
+                        if ($verifyempty == '') {
+                            $playerinventory->$equipslot = $itemtoequip;
+                            break;
+                        }
+                    }
+
+                    break;
+                case 'Ring':
+
+                    for ($i = 8; $i <= 9; $i++) {
+
+                        $user_id = Auth::user()->id;
+                        $equipslot = 'equipslot' . strval($i);
+                        $verifyempty = PlayerInventory::where('user_id', '=', $user_id)->value($equipslot);
+            
+                        if ($verifyempty == '') {
+                            $playerinventory->$equipslot = $itemtoequip;
+                            break;
+                        }
+                    }
+                    break;
+            }
 
 
 
+
+            
+
+
+            $playerinventory->save();
+            return redirect()->route('playerprofile');
+        }
     }
-
 }

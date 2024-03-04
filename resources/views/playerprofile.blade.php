@@ -113,15 +113,16 @@
                 <p>Potion</p>
             </div>
         </div>
-        <div class="mt-4">
+        <div class="mt-4 mr-10">
 
             {{-- Alterar para uma table no futuro --}}
-            @for ($i = 1; $i <= 5; $i++)
-                <div class="w-full border mt-1">
-                    <p>
+            @for ($i = 1; $i <= 10; $i++)
+                <div class="w-full border mt-1 ">
+                    <form action="" method="POST">
+                        @csrf
+                    <div>
                         @isset($BagItemsArray[$i])
-                            ID: {{ $BagItemsArray[$i]->id }}
-                            Main Stat: {{ $BagItemsArray[$i]->stat1 }}
+                            STAT1: {{ $BagItemsArray[$i]->stat1 }}
                             STAT2: {{ $BagItemsArray[$i]->stat2 }}
                             STAT3: {{ $BagItemsArray[$i]->stat3 }}
                             STAT4: {{ $BagItemsArray[$i]->stat4 }}
@@ -135,33 +136,11 @@
                             Type: {{ $BagItemsArray[$i]->type }}
                             Rarity: {{ $BagItemsArray[$i]->rarity }}
                         @endisset
-                    </p>
+                    
+                    <button class="float-end mx-2" type="submit" value="{{ $BagItemsArray[$i]->id }}" name="Equip">Equip</button>
+                    <button class="float-end" type="submit" value="{{ $BagItemsArray[$i]->id }}" name="Delete">Delete</button>
                 </div>
-            @endfor
-
-
-{{-- Tem que se criar a form e um botao delete que mete o valor null(pesquisar) --}}
-
-            @for ($i = 6; $i <= 10; $i++)
-                <div class="w-full border mt-1">
-                    <p>
-                        @isset($BagItemsArray[$i])
-                            ID: {{ $BagItemsArray[$i]->id }}
-                            Main Stat: {{ $BagItemsArray[$i]->stat1 }}
-                            STAT2: {{ $BagItemsArray[$i]->stat2 }}
-                            STAT3: {{ $BagItemsArray[$i]->stat3 }}
-                            STAT4: {{ $BagItemsArray[$i]->stat4 }}
-                            STAT5: {{ $BagItemsArray[$i]->stat5 }}
-                            STAT6: {{ $BagItemsArray[$i]->stat6 }}
-                            Armor: {{ $BagItemsArray[$i]->armor }}
-                            SE1: {{ $BagItemsArray[$i]->specialeffect1 }}
-                            SE2: {{ $BagItemsArray[$i]->specialeffect2 }}
-                            SE3: {{ $BagItemsArray[$i]->specialeffect3 }}
-                            SE4: {{ $BagItemsArray[$i]->specialeffect4 }}
-                            Type: {{ $BagItemsArray[$i]->type }}
-                            Rarity: {{ $BagItemsArray[$i]->rarity }}
-                        @endisset
-                    </p>
+                </form>
                 </div>
             @endfor
 

@@ -46,6 +46,7 @@ Route::post('/combatresult',[PlayerMenusController::class,'returncombatview'])->
 
 //Post quando o utilizador escolhe a class -> route chooseclass
 Route::post('/chooseclass',[GeneratePlayerStats::class,'submitplayerclass'])->name('chooseclass');
+Route::post('/playerprofile',[GeneratePlayerStats::class,'equipitem'])->name('equipitem');
 
 
 
