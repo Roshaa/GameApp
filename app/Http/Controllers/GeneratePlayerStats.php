@@ -367,9 +367,9 @@ class GeneratePlayerStats extends Controller
 
                         $user_id = Auth::user()->id;
                         $equipslot = 'equipslot' . strval($i);
-                        $verifyempty = PlayerInventory::where('user_id', '=', $user_id)->value($equipslot);
+                        $verifyslot = PlayerInventory::where('user_id', '=', $user_id)->value($equipslot);
             
-                        if ($verifyempty == '') {
+                        if ($verifyslot == '' && $verifyslot!=$itemtoequip) {
                             $playerinventory->$equipslot = $itemtoequip;
                             break;
                         }
@@ -382,9 +382,9 @@ class GeneratePlayerStats extends Controller
 
                         $user_id = Auth::user()->id;
                         $equipslot = 'equipslot' . strval($i);
-                        $verifyempty = PlayerInventory::where('user_id', '=', $user_id)->value($equipslot);
+                        $verifyslot = PlayerInventory::where('user_id', '=', $user_id)->value($equipslot);
             
-                        if ($verifyempty == '') {
+                        if ($verifyslot == ''&& $verifyslot!=$itemtoequip) {
                             $playerinventory->$equipslot = $itemtoequip;
                             break;
                         }
@@ -393,7 +393,16 @@ class GeneratePlayerStats extends Controller
             }
 
 
+            for ($i = 1; $i <= 10; $i++) {
 
+                $bagslotstring = 'bagslot' . strval($i);
+                $verifybag = PlayerInventory::where('user_id', '=', $user_id)->value($bagslotstring);
+    
+                if ($verifybag == $itemtoequip) {
+                    $playerinventory->$bagslotstring=null;
+                }
+
+            }
 
             
 

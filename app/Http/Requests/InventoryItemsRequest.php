@@ -23,6 +23,7 @@ class InventoryItemsRequest extends FormRequest
     {
         return [
         'Equip',
+        'Unequip',
         'Delete'
         ];
     }

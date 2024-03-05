@@ -1,6 +1,22 @@
 @extends('Layouts.app')
 @section('pagecontent')
-    <div class="w-3/12 mt-5">
+<div class="flex w-full bg-opacity-25 bg-no-repeat bg-cover" style="background-image: url(
+@switch($class)
+@case('Assassin')
+{{ 'images/assassinbackground.jpg' }}
+@break
+
+@case('Paladin')
+{{ 'images/paladinbackground.jpg' }}
+@break
+
+@case('Warlock')
+{{ 'images/paladinbackground.jpg' }}
+@break
+
+@default
+@endswitch );">
+    <div class="w-3/12 mt-5 text-white">
 
         <div class="mx-10">
 
@@ -22,7 +38,7 @@
             @endswitch
         </div>
     </div>
-    <div class="w-2/12 mt-5">
+    <div class="w-2/12 mt-5 text-white">
 
         <p>Main stat: {{ $GetStats['mainstat'] }}</p>
         <br>
@@ -59,7 +75,7 @@
             {{ $GetStats['ClassSpecial'] }}</p>
 
     </div>
-    <div class="w-7/12 mt-5">
+    <div class="w-7/12 mt-5 text-white">
 
         <div class="flex">
             <div class="w-1/6 h-1/6 mx-3	border">
@@ -145,4 +161,5 @@
             @endfor
 
         </div>
+    </div>
     @endsection
