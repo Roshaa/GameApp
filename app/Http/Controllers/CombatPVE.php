@@ -41,7 +41,7 @@ class CombatPVE extends Controller
 
 
 
-        while ($mobhp > 0 && $playerhp > 0) {
+        while ($mobhp >= 0 && $playerhp >= 0) {
             $mobrandomdamage = $mobdamage + ($mobdamage / rand(1, 5)) * ($level * 1.3);
             switch ($class) {
                 case "Assassin":

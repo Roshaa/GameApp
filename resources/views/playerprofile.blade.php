@@ -12,7 +12,7 @@
 @break
 
 @case('Warlock')
-{{ 'images/paladinbackground.jpg' }}
+{{ 'images/warlockbackground.jpg' }}
 @break
 
 @default
@@ -42,18 +42,18 @@
         <div class="w-2/12 mt-5 text-white">
 
             <p> @switch($class)
-                @case('Assassin')
-                    {{ 'Dexterity: ' }}
-                @break
+                    @case('Assassin')
+                        {{ 'Dexterity: ' }}
+                    @break
 
-                @case('Paladin')
-                    {{ 'Strength: ' }}
-                @break
+                    @case('Paladin')
+                        {{ 'Strength: ' }}
+                    @break
 
-                @case('Warlock')
-                    {{ 'Intelligence: ' }}
-                @break
-            @endswitch {{ $GetStats['mainstat'] }}</p>
+                    @case('Warlock')
+                        {{ 'Intelligence: ' }}
+                    @break
+                @endswitch {{ $GetStats['mainstat'] }}</p>
             <br>
             <p>Willpower: {{ $GetStats['Willpower'] }}</p>
             <p>Constituion: {{ $GetStats['Constituion'] }}</p>
@@ -77,9 +77,11 @@
                     @case('Assassin')
                         {{ 'Critical Strike: ' }}
                     @break
+
                     @case('Paladin')
                         {{ 'Self Heal: ' }}
                     @break
+
                     @case('Warlock')
                         {{ 'Mana: ' }}
                     @break
@@ -93,19 +95,19 @@
                 @isset($EquipItemsArray[$i])
                     <div class="w-full border mt-1">
                         @if ($EquipItemsArray[$i]->stat1 != '')
-                        @switch($class)
-                        @case('Assassin')
-                            {{ 'Dexterity: ' }}
-                        @break
-        
-                        @case('Paladin')
-                            {{ 'Strength: ' }}
-                        @break
-        
-                        @case('Warlock')
-                            {{ 'Intelligence: ' }}
-                        @break
-                    @endswitch {{ $EquipItemsArray[$i]->stat1 }}
+                            @switch($class)
+                                @case('Assassin')
+                                    {{ 'Dexterity: ' }}
+                                @break
+
+                                @case('Paladin')
+                                    {{ 'Strength: ' }}
+                                @break
+
+                                @case('Warlock')
+                                    {{ 'Intelligence: ' }}
+                                @break
+                            @endswitch {{ $EquipItemsArray[$i]->stat1 }}
                         @endif
                         @if ($EquipItemsArray[$i]->stat2 != '')
                             Willpower: {{ $EquipItemsArray[$i]->stat2 }}
@@ -124,6 +126,9 @@
                         @endif
                         @if ($EquipItemsArray[$i]->armor != '')
                             Armor: {{ $EquipItemsArray[$i]->armor }}
+                        @endif
+                        @if ($EquipItemsArray[$i]->damage != '')
+                            Damage: {{ $EquipItemsArray[$i]->damage }}
                         @endif
                         @if ($EquipItemsArray[$i]->specialeffect1 != '')
                             SE1: {{ $EquipItemsArray[$i]->specialeffect1 }}
@@ -158,19 +163,19 @@
                             @isset($BagItemsArray[$i])
                                 <div class="w-full border mt-1 ">
                                     @if ($BagItemsArray[$i]->stat1 != '')
-                                    @switch($class)
-                                    @case('Assassin')
-                                        {{ 'Dexterity: ' }}
-                                    @break
-                    
-                                    @case('Paladin')
-                                        {{ 'Strength: ' }}
-                                    @break
-                    
-                                    @case('Warlock')
-                                        {{ 'Intelligence: ' }}
-                                    @break
-                                @endswitch {{ $BagItemsArray[$i]->stat1 }}
+                                        @switch($class)
+                                            @case('Assassin')
+                                                {{ 'Dexterity: ' }}
+                                            @break
+
+                                            @case('Paladin')
+                                                {{ 'Strength: ' }}
+                                            @break
+
+                                            @case('Warlock')
+                                                {{ 'Intelligence: ' }}
+                                            @break
+                                        @endswitch {{ $BagItemsArray[$i]->stat1 }}
                                     @endif
                                     @if ($BagItemsArray[$i]->stat2 != '')
                                         Willpower: {{ $BagItemsArray[$i]->stat2 }}
@@ -189,6 +194,9 @@
                                     @endif
                                     @if ($BagItemsArray[$i]->armor != '')
                                         Armor: {{ $BagItemsArray[$i]->armor }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->damage != '')
+                                        Damage: {{ $BagItemsArray[$i]->damage }}
                                     @endif
                                     @if ($BagItemsArray[$i]->specialeffect1 != '')
                                         SE1: {{ $BagItemsArray[$i]->specialeffect1 }}

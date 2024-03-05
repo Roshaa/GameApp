@@ -120,9 +120,9 @@ class GeneratePlayerStats extends Controller
                     //Librarian
                     0,
                     //BaseHP
-                    140,
+                    200,
                     //BaseDamage
-                    40
+                    80
                 ];
 
                 break;
