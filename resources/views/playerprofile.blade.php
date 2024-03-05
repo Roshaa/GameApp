@@ -1,6 +1,7 @@
 @extends('Layouts.app')
 @section('pagecontent')
-<div class="flex w-full bg-opacity-25 bg-no-repeat bg-cover" style="background-image: url(
+    <div class="flex w-full bg-opacity-25 bg-no-repeat bg-cover"
+        style="background-image: url(
 @switch($class)
 @case('Assassin')
 {{ 'images/assassinbackground.jpg' }}
@@ -16,150 +17,211 @@
 
 @default
 @endswitch );">
-    <div class="w-3/12 mt-5 text-white">
+        <div class="w-3/12 mt-5 text-white">
 
-        <div class="mx-10">
+            <div class="mx-10">
 
-            <p class="border-2 rounded border-slate-700 text-center p-5 text-2xl font-medium">{{ $playername }}</p>
-            @switch($class)
+                <p class="border-2 rounded border-slate-700 text-center p-5 text-2xl font-medium">{{ $playername }}</p>
+                @switch($class)
+                    @case('Assassin')
+                        <img src="images/assassinclass.jpg" class="mt-3" alt="">
+                    @break
+
+                    @case('Paladin')
+                        <img src="images/paladinclass.jpg" class="mt-3" alt="">
+                    @break
+
+                    @case('Warlock')
+                        <img src="images/warlockclass.jpg" class="mt-3" alt="">
+                    @break
+
+                    @default
+                @endswitch
+            </div>
+        </div>
+        <div class="w-2/12 mt-5 text-white">
+
+            <p> @switch($class)
                 @case('Assassin')
-                    <img src="images/assassinclass.jpg" class="mt-3" alt="">
+                    {{ 'Dexterity: ' }}
                 @break
 
                 @case('Paladin')
-                    <img src="images/paladinclass.jpg" class="mt-3" alt="">
+                    {{ 'Strength: ' }}
                 @break
 
                 @case('Warlock')
-                    <img src="images/warlockclass.jpg" class="mt-3" alt="">
+                    {{ 'Intelligence: ' }}
                 @break
+            @endswitch {{ $GetStats['mainstat'] }}</p>
+            <br>
+            <p>Willpower: {{ $GetStats['Willpower'] }}</p>
+            <p>Constituion: {{ $GetStats['Constituion'] }}</p>
+            <p>Expertise: {{ $GetStats['Expertise'] }}</p>
+            <p>Resistance: {{ $GetStats['Resistance'] }}</p>
+            <p>Mastery: {{ $GetStats['Mastery'] }}</p>
+            <br>
+            <p>Alchemy: {{ $GetStats['Alchemy'] }}</p>
+            <p>Armoursmith: {{ $GetStats['Armoursmith'] }}</p>
+            <p>Weaponsmith: {{ $GetStats['Weaponsmith'] }}</p>
+            <p>Jewellery: {{ $GetStats['Jewellery'] }}</p>
+            <p>Librarian {{ $GetStats['Librarian'] }}</p>
+            <br>
+            <p>HP: {{ $GetStats['hp'] }}</p>
+            <p>Damage: {{ $GetStats['damage'] }}</p>
+            <p>Skill Damage: {{ $GetStats['skilldamage'] }}</p>
+            <p>Damage Reduction: {{ $GetStats['damagereduction'] }}</p>
+            <p>
+                @switch($class)
+                    @case('Assassin')
+                        {{ 'Critical Strike: ' }}
+                    @break
 
-                @default
-            @endswitch
-        </div>
-    </div>
-    <div class="w-2/12 mt-5 text-white">
+                    @case('Paladin')
+                        {{ 'Self Heal: ' }}
+                    @break
 
-        <p>Main stat: {{ $GetStats['mainstat'] }}</p>
-        <br>
-        <p>Willpower: {{ $GetStats['Willpower'] }}</p>
-        <p>Constituion: {{ $GetStats['Constituion'] }}</p>
-        <p>Expertise: {{ $GetStats['Expertise'] }}</p>
-        <p>Resistance: {{ $GetStats['Resistance'] }}</p>
-        <p>Mastery: {{ $GetStats['Mastery'] }}</p>
-        <br>
-        <p>Alchemy: {{ $GetStats['Alchemy'] }}</p>
-        <p>Armoursmith: {{ $GetStats['Armoursmith'] }}</p>
-        <p>Weaponsmith: {{ $GetStats['Weaponsmith'] }}</p>
-        <p>Jewellery: {{ $GetStats['Jewellery'] }}</p>
-        <p>Librarian {{ $GetStats['Librarian'] }}</p>
-        <br>
-        <p>HP: {{ $GetStats['hp'] }}</p>
-        <p>Damage: {{ $GetStats['damage'] }}</p>
-        <p>Skill Damage: {{ $GetStats['skilldamage'] }}</p>
-        <p>Damage Reduction: {{ $GetStats['damagereduction'] }}</p>
-        <p>
-            @switch($class)
-                @case('Assassin')
-                    {{ 'Critical Strike: ' }}
-                @break
-
-                @case('Paladin')
-                    {{ 'Self Heal: ' }}
-                @break
-
-                @case('Warlock')
-                    {{ 'Mana: ' }}
-                @break
-            @endswitch
-            {{ $GetStats['ClassSpecial'] }}</p>
-
-    </div>
-    <div class="w-7/12 mt-5 text-white">
-
-        <div class="flex">
-            <div class="w-1/6 h-1/6 mx-3	border">
-                <p>Item Slot</p>
-            </div>
-            <div class="w-1/6 h-1/6 mx-3	border">
-                <p>Item Slot</p>
-            </div>
-            <div class="w-1/6 h-1/6 mx-3	border">
-                <p>Item Slot</p>
-            </div>
-            <div class="w-1/6 h-1/6 mx-3	border">
-                <p>Item Slot</p>
-            </div>
+                    @case('Warlock')
+                        {{ 'Mana: ' }}
+                    @break
+                @endswitch
+                {{ $GetStats['ClassSpecial'] }}</p>
 
         </div>
-        <div class="flex mt-4">
-            <div class="w-1/6 h-1/6 mx-3	border">
-                <p>Profession Tool</p>
-            </div>
-            <div class="w-1/6 h-1/6 mx-3	border">
-                <p>Profession Tool</p>
-            </div>
-            <div class="w-1/6 h-1/6 mx-3	border">
-                <p>Ring Slot</p>
-            </div>
-            <div class="w-1/6 h-1/6 mx-3	border">
-                <p>Ring Slot</p>
-            </div>
+        <div class="w-7/12 mt-5 text-white mr-10">
 
-        </div>
-        <div class="flex mt-4">
-            <div class="w-1/6 h-1/6 mx-3	border">
-                <p>Weapon Slot</p>
-            </div>
-            <div class="w-1/6 h-1/6 mx-8	border">
-                <p>Relic</p>
-            </div>
-            <div class="w-1/6 h-1/6 mx-1	border">
-                <p>Relic</p>
-            </div>
-            <div class="w-1/6 h-1/6 mx-1	border">
-                <p>Relic</p>
-            </div>
-        </div>
-        <div class="flex mt-4">
-            <div class="w-1/6 h-1/6 mx-3	border">
-                <p>Potion</p>
-            </div>
-            <div class="w-1/6 h-1/6 mx-8	border">
-                <p>Potion</p>
-            </div>
-        </div>
-        <div class="mt-4 mr-10">
+            @for ($i = 0; $i <= 15; $i++)
+                @isset($EquipItemsArray[$i])
+                    <div class="w-full border mt-1">
+                        @if ($EquipItemsArray[$i]->stat1 != '')
+                        @switch($class)
+                        @case('Assassin')
+                            {{ 'Dexterity: ' }}
+                        @break
+        
+                        @case('Paladin')
+                            {{ 'Strength: ' }}
+                        @break
+        
+                        @case('Warlock')
+                            {{ 'Intelligence: ' }}
+                        @break
+                    @endswitch {{ $EquipItemsArray[$i]->stat1 }}
+                        @endif
+                        @if ($EquipItemsArray[$i]->stat2 != '')
+                            Willpower: {{ $EquipItemsArray[$i]->stat2 }}
+                        @endif
+                        @if ($EquipItemsArray[$i]->stat3 != '')
+                            Constitution: {{ $EquipItemsArray[$i]->stat3 }}
+                        @endif
+                        @if ($EquipItemsArray[$i]->stat4 != '')
+                            Expertise: {{ $EquipItemsArray[$i]->stat4 }}
+                        @endif
+                        @if ($EquipItemsArray[$i]->stat5 != '')
+                            Resistance: {{ $EquipItemsArray[$i]->stat5 }}
+                        @endif
+                        @if ($EquipItemsArray[$i]->stat6 != '')
+                            Mastery: {{ $EquipItemsArray[$i]->stat6 }}
+                        @endif
+                        @if ($EquipItemsArray[$i]->armor != '')
+                            Armor: {{ $EquipItemsArray[$i]->armor }}
+                        @endif
+                        @if ($EquipItemsArray[$i]->specialeffect1 != '')
+                            SE1: {{ $EquipItemsArray[$i]->specialeffect1 }}
+                        @endif
+                        @if ($EquipItemsArray[$i]->specialeffect2 != '')
+                            SE2: {{ $EquipItemsArray[$i]->specialeffect2 }}
+                        @endif
+                        @if ($EquipItemsArray[$i]->specialeffect3 != '')
+                            SE3: {{ $EquipItemsArray[$i]->specialeffect3 }}
+                        @endif
+                        @if ($EquipItemsArray[$i]->specialeffect4 != '')
+                            SE4: {{ $EquipItemsArray[$i]->specialeffect4 }}
+                        @endif
+                        @if ($EquipItemsArray[$i]->type != '')
+                            Type: {{ $EquipItemsArray[$i]->type }}
+                        @endif
+                        @if ($EquipItemsArray[$i]->rarity != '')
+                            Rarity: {{ $EquipItemsArray[$i]->rarity }}
+                        @endif
+                    </div>
+                @endisset
+            @endfor
 
-            {{-- Alterar para uma table no futuro --}}
-            @for ($i = 1; $i <= 10; $i++)
-                <div class="w-full border mt-1 ">
+
+            <div class="mt-4 mr-10">
+
+                {{-- Alterar para uma table no futuro --}}
+                @for ($i = 1; $i <= 10; $i++)
                     <form action="" method="POST">
                         @csrf
-                    <div>
-                        @isset($BagItemsArray[$i])
-                            STAT1: {{ $BagItemsArray[$i]->stat1 }}
-                            STAT2: {{ $BagItemsArray[$i]->stat2 }}
-                            STAT3: {{ $BagItemsArray[$i]->stat3 }}
-                            STAT4: {{ $BagItemsArray[$i]->stat4 }}
-                            STAT5: {{ $BagItemsArray[$i]->stat5 }}
-                            STAT6: {{ $BagItemsArray[$i]->stat6 }}
-                            Armor: {{ $BagItemsArray[$i]->armor }}
-                            SE1: {{ $BagItemsArray[$i]->specialeffect1 }}
-                            SE2: {{ $BagItemsArray[$i]->specialeffect2 }}
-                            SE3: {{ $BagItemsArray[$i]->specialeffect3 }}
-                            SE4: {{ $BagItemsArray[$i]->specialeffect4 }}
-                            Type: {{ $BagItemsArray[$i]->type }}
-                            Rarity: {{ $BagItemsArray[$i]->rarity }}
-                        @endisset
+                        <div>
+                            @isset($BagItemsArray[$i])
+                                <div class="w-full border mt-1 ">
+                                    @if ($BagItemsArray[$i]->stat1 != '')
+                                    @switch($class)
+                                    @case('Assassin')
+                                        {{ 'Dexterity: ' }}
+                                    @break
                     
-                    <button class="float-end mx-2" type="submit" value="{{ $BagItemsArray[$i]->id }}" name="Equip">Equip</button>
-                    <button class="float-end" type="submit" value="{{ $BagItemsArray[$i]->id }}" name="Delete">Delete</button>
-                </div>
-                </form>
-                </div>
+                                    @case('Paladin')
+                                        {{ 'Strength: ' }}
+                                    @break
+                    
+                                    @case('Warlock')
+                                        {{ 'Intelligence: ' }}
+                                    @break
+                                @endswitch {{ $BagItemsArray[$i]->stat1 }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->stat2 != '')
+                                        Willpower: {{ $BagItemsArray[$i]->stat2 }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->stat3 != '')
+                                        Constitution: {{ $BagItemsArray[$i]->stat3 }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->stat4 != '')
+                                        Expertise: {{ $BagItemsArray[$i]->stat4 }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->stat5 != '')
+                                        Resistance: {{ $BagItemsArray[$i]->stat5 }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->stat6 != '')
+                                        Mastery: {{ $BagItemsArray[$i]->stat6 }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->armor != '')
+                                        Armor: {{ $BagItemsArray[$i]->armor }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->specialeffect1 != '')
+                                        SE1: {{ $BagItemsArray[$i]->specialeffect1 }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->specialeffect2 != '')
+                                        SE2: {{ $BagItemsArray[$i]->specialeffect2 }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->specialeffect3 != '')
+                                        SE3: {{ $BagItemsArray[$i]->specialeffect3 }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->specialeffect4 != '')
+                                        SE4: {{ $BagItemsArray[$i]->specialeffect4 }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->type != '')
+                                        Type: {{ $BagItemsArray[$i]->type }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->rarity != '')
+                                        Rarity: {{ $BagItemsArray[$i]->rarity }}
+                                    @endif
+                                    <button class="float-end mx-2" type="submit" value="{{ $BagItemsArray[$i]->id }}"
+                                        name="Equip">Equip</button>
+                                    <button class="float-end" type="submit" value="{{ $BagItemsArray[$i]->id }}"
+                                        name="Delete">Delete</button>
+                                </div>
+                            @endisset
+
+
+
+                    </form>
+            </div>
             @endfor
 
         </div>
     </div>
-    @endsection
+@endsection

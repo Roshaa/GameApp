@@ -277,6 +277,16 @@ class GeneratePlayerStats extends Controller
             array_push($BagItemsArray, $ItemInfo);
         };
 
+        $EquipItemsArray = [];
+
+        for ($i = 0; $i <= 15; $i++) {
+
+            $bagslot = 'equipslot' . strval($i);
+            $ItemId = $InventoryInfo->$bagslot;
+            $ItemInfo = Items::find($ItemId);
+            array_push($EquipItemsArray, $ItemInfo);
+        };
+
         //POSSIVELMENTE ALTERAR DEPOIS AS VARIAVEIS DAS BAGSLOTSINFO
 
         return view(
@@ -285,8 +295,8 @@ class GeneratePlayerStats extends Controller
                 'class' => $class,
                 'playername' => $playername,
                 'GetStats' => $GetStats,
-                'BagItemsArray' => $BagItemsArray
-            ]
+                'BagItemsArray' => $BagItemsArray,
+                'EquipItemsArray'=>$EquipItemsArray            ]
         );
     }
 
@@ -330,85 +340,125 @@ class GeneratePlayerStats extends Controller
             }
         }
     }
-    public static function equipitem(InventoryItemsRequest $request)
+    public static function ManageItems(InventoryItemsRequest $request)
     {
 
-        $itemtoequip=$request->Equip;
         $user_id = Auth::user()->id;
-        $verifyownership=Items::where('user_owner_id', '=', $user_id)->value('user_owner_id');
         $Inventoryid = PlayerInventory::where('user_id', '=', $user_id)->value('id');
         $playerinventory = PlayerInventory::find($Inventoryid);
-        $itemtype = Items::where('id', '=', $itemtoequip)->value('type');
 
-        
+        if(isset($request->Delete)) {   
 
-
-        if ($user_id == $verifyownership) {
-
-            switch ($itemtype) {
-                case 'Head':
-                    $playerinventory->equipslot1 = $itemtoequip;
-                    break;
-                case 'Chest':
-                    $playerinventory->equipslot2 = $itemtoequip;
-                    break;
-                case 'Gloves':
-                    $playerinventory->equipslot3 = $itemtoequip;
-                    break;
-                case 'Boots':
-                    $playerinventory->equipslot4 = $itemtoequip;
-                    break;
-                case 'Weapon':
-                    $playerinventory->equipslot5 = $itemtoequip;
-                    break;
-                case 'ProfessionTool':
-
-                    for ($i = 6; $i <= 7; $i++) {
-
-                        $user_id = Auth::user()->id;
-                        $equipslot = 'equipslot' . strval($i);
-                        $verifyslot = PlayerInventory::where('user_id', '=', $user_id)->value($equipslot);
-            
-                        if ($verifyslot == '' && $verifyslot!=$itemtoequip) {
-                            $playerinventory->$equipslot = $itemtoequip;
-                            break;
-                        }
-                    }
-
-                    break;
-                case 'Ring':
-
-                    for ($i = 8; $i <= 9; $i++) {
-
-                        $user_id = Auth::user()->id;
-                        $equipslot = 'equipslot' . strval($i);
-                        $verifyslot = PlayerInventory::where('user_id', '=', $user_id)->value($equipslot);
-            
-                        if ($verifyslot == ''&& $verifyslot!=$itemtoequip) {
-                            $playerinventory->$equipslot = $itemtoequip;
-                            break;
-                        }
-                    }
-                    break;
-            }
-
-
+            $chosenitem=$request->Delete;
+            $deleteitem= Items::find($chosenitem);
+    
             for ($i = 1; $i <= 10; $i++) {
-
+    
                 $bagslotstring = 'bagslot' . strval($i);
                 $verifybag = PlayerInventory::where('user_id', '=', $user_id)->value($bagslotstring);
     
-                if ($verifybag == $itemtoequip) {
+                if ($verifybag == $chosenitem) {
                     $playerinventory->$bagslotstring=null;
                 }
+    
+            }
+    
+            $playerinventory->save();
+            echo $deleteitem;
+            $deleteitem->delete();
+    
+            return redirect()->route('playerprofile');
 
+        }else{
+
+            $itemtoequip=$request->Equip;
+            $verifyownership=Items::where('user_owner_id', '=', $user_id)->value('user_owner_id');
+            $itemtype = Items::where('id', '=', $itemtoequip)->value('type');
+    
+            if ($user_id == $verifyownership) {
+    
+                switch ($itemtype) {
+                    case 'Head':
+                        $replaceitem=$playerinventory->equipslot1;
+                        $playerinventory->equipslot1 = $itemtoequip;
+                        break;
+                    case 'Chest':
+                        $replaceitem=$playerinventory->equipslot2;
+                        $playerinventory->equipslot2 = $itemtoequip;
+                        break;
+                    case 'Gloves':
+                        $replaceitem=$playerinventory->equipslot3;
+                        $playerinventory->equipslot3 = $itemtoequip;
+                        break;
+                    case 'Boots':
+                        $replaceitem=$playerinventory->equipslot4;
+                        $playerinventory->equipslot4 = $itemtoequip;
+                        break;
+                    case 'Weapon':
+                        $replaceitem=$playerinventory->equipslot5;
+                        $playerinventory->equipslot5 = $itemtoequip;
+                        break;
+                    case 'ProfessionTool':
+    
+                        for ($i = 6; $i <= 7; $i++) {
+    
+                            $user_id = Auth::user()->id;
+                            $equipslot = 'equipslot' . strval($i);
+                            $verifyslot = PlayerInventory::where('user_id', '=', $user_id)->value($equipslot);
+                
+                            if ($verifyslot == '' && $verifyslot!=$itemtoequip) {
+                                $replaceitem=$playerinventory->$equipslot;
+                                $playerinventory->$equipslot = $itemtoequip;
+                                break;
+                            }
+                        }
+    
+                        break;
+                    case 'Ring':
+    
+                        for ($i = 8; $i <= 9; $i++) {
+    
+                            $user_id = Auth::user()->id;
+                            $equipslot = 'equipslot' . strval($i);
+                            $verifyslot = PlayerInventory::where('user_id', '=', $user_id)->value($equipslot);
+                
+                            if ($verifyslot == ''&& $verifyslot!=$itemtoequip) {
+                                $replaceitem=$playerinventory->$equipslot;
+                                $playerinventory->$equipslot = $itemtoequip;
+                                break;
+                            }
+                        }
+                        break;
+                }
+    
+    
+                for ($i = 1; $i <= 10; $i++) {
+    
+                    $bagslotstring = 'bagslot' . strval($i);
+                    $verifybag = PlayerInventory::where('user_id', '=', $user_id)->value($bagslotstring);
+        
+                    if ($verifybag == $itemtoequip) {
+                        $playerinventory->$bagslotstring=null;
+                        if($replaceitem!=''){
+                            $playerinventory->$bagslotstring=$replaceitem;
+                        }
+                    }
+    
+                }
+    
+                
+    
+    
+                $playerinventory->save();
+                return redirect()->route('playerprofile');
             }
 
-            
 
-
-            $playerinventory->save();
-            return redirect()->route('playerprofile');
         }
+
+
+
+        
     }
+
 }

@@ -2,27 +2,15 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GeneratePlayerStats;
-use App\Http\Controllers\CombatPVE;
 use App\Http\Controllers\PlayerMenusController;
-
-
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
-use App\Models\playerinventory;
-use App\Models\UserCharacter;
-
-use App\Http\Requests\MissionOptionRequest;
-use App\Http\Requests\ChooseClassRequest;
-
-//possivelmente mover para outro sitio
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-//
+
 
 Route::get('/', function () {return view('welcome');});
 Route::get('/dashboard', function () {return redirect('playerprofile');}); 
 Route::get('/profile', function () {return view('profile.edit');});
-Route::get('/combatresult', function () {return view('combatresult');})->name('combatresult');
 Route::get('/chooseclass', [PlayerMenusController::class,'chooseclass'])->name('chooseclass');
 
 //Retorna os mobs que existem na db para esta view que permite uma escolha de 1 a 3
@@ -30,7 +18,7 @@ Route::get('/playermissions', [PlayerMenusController::class,'missionsmobs'])->mi
 
 //Retorna a view playerprofile perante uma funcao da class generateplayerstats que dá os valores dos stats do jogador
 Route::get('/playerprofile', [GeneratePlayerStats::class, 'returnprofilewithstats'])->middleware(['auth', 'verified'])->name('playerprofile');
-
+Route::get('/combatresult', function () {return view('combatresult');})->name('combatresult');
 //Apenas para testes
 Route::get('/devpage', function () {
 
@@ -42,11 +30,11 @@ Route::get('/devpage', function () {
 
 //Escolha nas missions recebe o post(escolha de 1 a 3) e faz o combate
 //Necessário solucao para evitar multiplos clicks na form
-Route::post('/combatresult',[PlayerMenusController::class,'returncombatview'])->name('combatresult');
+Route::post('/combatresult',[PlayerMenusController::class,'returncombatview'])->name('CombatResult');
 
 //Post quando o utilizador escolhe a class -> route chooseclass
-Route::post('/chooseclass',[GeneratePlayerStats::class,'submitplayerclass'])->name('chooseclass');
-Route::post('/playerprofile',[GeneratePlayerStats::class,'equipitem'])->name('equipitem');
+Route::post('/chooseclass',[GeneratePlayerStats::class,'submitplayerclass'])->name('ChooseClass');
+Route::post('/playerprofile',[GeneratePlayerStats::class,'ManageItems'])->name('ManageItems');
 
 
 
