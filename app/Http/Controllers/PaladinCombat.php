@@ -32,12 +32,18 @@ class PaladinCombat extends Controller
 
         $ClassSpecial = "$ClassSpecial";
         $hp="$hp";
+
         $restorehp=$hp*($ClassSpecial/100);
 
         $damagereduced=($damagereduction/100)*$damagereceived;
-        $damagetaken=$damagereceived-$damagereduced-$restorehp;
+        $damagetaken=$damagereceived-$damagereduced;
 
-        return $damagetaken;
+        //Evita curar ao ter demasiado dano reduzido
+        if($damagetaken<0){
+            $damagetaken=0;
+        }
+        $damagetaken=$damagetaken-$restorehp;
+        return number_format($damagetaken,2);
 
     }
 }

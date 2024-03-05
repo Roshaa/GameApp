@@ -180,7 +180,7 @@ class ItemGeneration extends Controller
 
         $Inventoryid = PlayerInventory::where('user_id', '=', $user_id)->value('id');
         $PlayerInventory = PlayerInventory::find($Inventoryid);
-        $bagslotstring = GeneratePlayerStats::verifyavailablebagslot();
+        $bagslotstring = ItemsController::verifyavailablebagslot();
 
         if ($bagslotstring != 'FullBag') {
             $Items->save();

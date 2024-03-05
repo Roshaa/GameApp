@@ -44,7 +44,12 @@ class AssassinCombat extends Controller
         $damagereduced=($damagereduction/100)*$damagereceived;
         $damagetaken=$damagereceived-$damagereduced;
 
-        return $damagetaken;
+        //Evita curar ao ter demasiado dano reduzido
+        if($damagetaken<0){
+            $damagetaken=0;
+        }
+
+        return number_format($damagetaken,2);
 
     }
 

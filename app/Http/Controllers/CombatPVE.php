@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
-Use App\Http\Controllers\ItemGeneration;
+use App\Http\Controllers\ItemGeneration;
 use App\Http\Controllers\GeneratePlayerStats;
 use App\Http\Controllers\AssassinCombat;
 use App\Http\Controllers\WarlockCombat;
@@ -35,7 +35,6 @@ class CombatPVE extends Controller
         $mobtier = mobsmissions::where('id', '=', $mobchosen)->value('MobTier');
         $mobimg = mobsmissions::where('id', '=', $mobchosen)->value('imglink');
 
-
         $getstats = GeneratePlayerStats::GenerateStats();
         extract($getstats);
         $playerhp = "$hp";
@@ -43,37 +42,41 @@ class CombatPVE extends Controller
 
 
         while ($mobhp > 0 && $playerhp > 0) {
-
+            $mobrandomdamage = $mobdamage + ($mobdamage / rand(1, 5)) * ($level * 1.3);
             switch ($class) {
                 case "Assassin":
-    
+
                     $playerattack = AssassinCombat::AssassinAttack();
-                    $playerdefend = AssassinCombat::AssassinDefend($mobdamage);
-    
+                    $playerdefend = AssassinCombat::AssassinDefend($mobrandomdamage);
+
                     break;
                 case "Paladin":
-    
+
                     $playerattack = PaladinCombat::PaladinAttack();
-                    $playerdefend = PaladinCombat::PaladinDefend($mobdamage);
-    
+                    $playerdefend = PaladinCombat::PaladinDefend($mobrandomdamage);
+                   
+
+
                     break;
                 case "Warlock":
-    
+
                     $playerattack = WarlockCombat::WarlockAttack();
-                    $playerdefend = WarlockCombat::WarlockDefend($mobdamage);
-    
+                    $playerdefend = WarlockCombat::WarlockDefend($mobrandomdamage);
+
                     break;
             }
 
+
             $mobhp = $mobhp - $playerattack;
-            echo "Player Attack: "."$playerattack"."<br>";
+            echo "Player Attack: " . "$playerattack" . "<br>";
             $playerhp = $playerhp - $playerdefend;
-            echo "Player DamageTaken: "."$playerdefend"."<br>";
+            echo "Player DamageTaken: " . "$playerdefend" . "<br>";
         }
 
         $combatresult = [
-            'playermissinghp' => $playerhp,
-            'mobmissinghp' => $mobhp,
+
+            'playermissinghp' => number_format($playerhp, 2),
+            'mobmissinghp' => number_format($mobhp, 2),
 
         ];
         extract($combatresult);
@@ -86,13 +89,12 @@ class CombatPVE extends Controller
             ];
 
 
-            if($mobhp<=0){
+        if ($mobhp <= 0) {
 
-                ItemGeneration::missionitemgeneration();
+            ItemGeneration::missionitemgeneration();
+        }
 
-            }
-        
-        
+
         return $combatresultinfo;
     }
 }

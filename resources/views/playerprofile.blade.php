@@ -71,16 +71,15 @@
             <p>Damage: {{ $GetStats['damage'] }}</p>
             <p>Skill Damage: {{ $GetStats['skilldamage'] }}</p>
             <p>Damage Reduction: {{ $GetStats['damagereduction'] }}</p>
+            <p>Armor: {{ $GetStats['armor'] }}</p>
             <p>
                 @switch($class)
                     @case('Assassin')
                         {{ 'Critical Strike: ' }}
                     @break
-
                     @case('Paladin')
                         {{ 'Self Heal: ' }}
                     @break
-
                     @case('Warlock')
                         {{ 'Mana: ' }}
                     @break
@@ -221,7 +220,6 @@
                     </form>
             </div>
             @endfor
-
         </div>
     </div>
 @endsection

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\GeneratePlayerStats;
 use App\Http\Controllers\PlayerMenusController;
 use Illuminate\Support\Facades\Route;
@@ -34,7 +35,7 @@ Route::post('/combatresult',[PlayerMenusController::class,'returncombatview'])->
 
 //Post quando o utilizador escolhe a class -> route chooseclass
 Route::post('/chooseclass',[GeneratePlayerStats::class,'submitplayerclass'])->name('ChooseClass');
-Route::post('/playerprofile',[GeneratePlayerStats::class,'ManageItems'])->name('ManageItems');
+Route::post('/playerprofile',[ItemsController::class,'ManageItems'])->name('ManageItems');
 
 
 
