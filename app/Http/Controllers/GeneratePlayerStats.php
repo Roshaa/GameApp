@@ -364,7 +364,6 @@ class GeneratePlayerStats extends Controller
             }
     
             $playerinventory->save();
-            echo $deleteitem;
             $deleteitem->delete();
     
             return redirect()->route('playerprofile');

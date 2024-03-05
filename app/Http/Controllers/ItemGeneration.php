@@ -180,11 +180,11 @@ class ItemGeneration extends Controller
 
         $Inventoryid = PlayerInventory::where('user_id', '=', $user_id)->value('id');
         $PlayerInventory = PlayerInventory::find($Inventoryid);
-        $LastItem = Items::where('user_owner_id', '=', $user_id)->orderBy('id', 'desc')->first();
         $bagslotstring = GeneratePlayerStats::verifyavailablebagslot();
 
         if ($bagslotstring != 'FullBag') {
             $Items->save();
+            $LastItem = Items::where('user_owner_id', '=', $user_id)->orderBy('id', 'desc')->first();
             $PlayerInventory->$bagslotstring = $LastItem->id;
             $PlayerInventory->save();
         }
