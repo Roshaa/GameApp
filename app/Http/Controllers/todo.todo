@@ -1,6 +1,6 @@
 New Task:
     ☐  Todos os item types
-
-    ☐  Desiquipar item e voltar para uma das bagslots
-    ☐  Optimizar codigo, existe varias linhas repetidas
+    ☐  Resolver bug ao equipar item em slots com mais de 1 slot para esse tipo, ex: ring
+    ☐  Optimizar codigo
+    ☐  Combatimprovements, player randomize damage, both not die, overall values
     

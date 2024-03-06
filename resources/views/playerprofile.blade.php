@@ -39,57 +39,8 @@
                 @endswitch
             </div>
         </div>
-        <div class="w-2/12 mt-5 text-white">
 
-            <p> @switch($class)
-                    @case('Assassin')
-                        {{ 'Dexterity: ' }}
-                    @break
-
-                    @case('Paladin')
-                        {{ 'Strength: ' }}
-                    @break
-
-                    @case('Warlock')
-                        {{ 'Intelligence: ' }}
-                    @break
-                @endswitch {{ $GetStats['mainstat'] }}</p>
-            <br>
-            <p>Willpower: {{ $GetStats['Willpower'] }}</p>
-            <p>Constituion: {{ $GetStats['Constituion'] }}</p>
-            <p>Expertise: {{ $GetStats['Expertise'] }}</p>
-            <p>Resistance: {{ $GetStats['Resistance'] }}</p>
-            <p>Mastery: {{ $GetStats['Mastery'] }}</p>
-            <br>
-            <p>Alchemy: {{ $GetStats['Alchemy'] }}</p>
-            <p>Armoursmith: {{ $GetStats['Armoursmith'] }}</p>
-            <p>Weaponsmith: {{ $GetStats['Weaponsmith'] }}</p>
-            <p>Jewellery: {{ $GetStats['Jewellery'] }}</p>
-            <p>Librarian {{ $GetStats['Librarian'] }}</p>
-            <br>
-            <p>HP: {{ $GetStats['hp'] }}</p>
-            <p>Damage: {{ $GetStats['damage'] }}</p>
-            <p>Skill Damage: {{ $GetStats['skilldamage'] }}</p>
-            <p>Damage Reduction: {{ $GetStats['damagereduction'] }}</p>
-            <p>Armor: {{ $GetStats['armor'] }}</p>
-            <p>
-                @switch($class)
-                    @case('Assassin')
-                        {{ 'Critical Strike: ' }}
-                    @break
-
-                    @case('Paladin')
-                        {{ 'Self Heal: ' }}
-                    @break
-
-                    @case('Warlock')
-                        {{ 'Mana: ' }}
-                    @break
-                @endswitch
-                {{ $GetStats['ClassSpecial'] }}</p>
-
-        </div>
-        <div class="w-7/12 mt-5 text-white mr-10">
+        <div class="w-9/12 mt-5 text-white mr-10">
 
             @for ($i = 0; $i <= 15; $i++)
                 @isset($EquipItemsArray[$i])
@@ -154,7 +105,7 @@
                         <button class="float-end mx-2" type="submit" value="{{ $EquipItemsArray[$i]->id }}"
                             name="Unequip">Unequip</button>
                     </form>
-                    </div>
+        </div>
                 @endisset
             @endfor
 
@@ -235,5 +186,58 @@
             </div>
             @endfor
         </div>
+        <div class="flex mt-5 text-white">
+<div class="">
+            <p> @switch($class)
+                    @case('Assassin')
+                        {{ 'Dexterity: ' }}
+                    @break
+
+                    @case('Paladin')
+                        {{ 'Strength: ' }}
+                    @break
+
+                    @case('Warlock')
+                        {{ 'Intelligence: ' }}
+                    @break
+                @endswitch {{ $GetStats['mainstat'] }}</p>
+            
+            
+            <p>Willpower: {{ $GetStats['Willpower'] }}</p>
+            <p>Constituion: {{ $GetStats['Constituion'] }}</p>
+            <p>Expertise: {{ $GetStats['Expertise'] }}</p>
+            <p>Resistance: {{ $GetStats['Resistance'] }}</p>
+            <p>Mastery: {{ $GetStats['Mastery'] }}</p>
+        </div><div class="ml-5">
+            <p>Alchemy: {{ $GetStats['Alchemy'] }}</p>
+            <p>Armoursmith: {{ $GetStats['Armoursmith'] }}</p>
+            <p>Weaponsmith: {{ $GetStats['Weaponsmith'] }}</p>
+            <p>Jewellery: {{ $GetStats['Jewellery'] }}</p>
+            <p>Librarian {{ $GetStats['Librarian'] }}</p>
+        </div><div class="ml-5">
+            <p>HP: {{ $GetStats['hp'] }}</p>
+            <p>Damage: {{ $GetStats['damage'] }}</p>
+            <p>Skill Damage: {{ $GetStats['skilldamage'] }}</p>
+            <p>Damage Reduction: {{ $GetStats['damagereduction'] }}</p>
+            <p>Armor: {{ $GetStats['armor'] }}</p>
+            <p>
+                @switch($class)
+                    @case('Assassin')
+                        {{ 'Critical Strike: ' }}
+                    @break
+
+                    @case('Paladin')
+                        {{ 'Self Heal: ' }}
+                    @break
+
+                    @case('Warlock')
+                        {{ 'Mana: ' }}
+                    @break
+                @endswitch
+                {{ $GetStats['ClassSpecial'] }}</p></div>
+
+        </div>
+    </div>
+
     </div>
 @endsection

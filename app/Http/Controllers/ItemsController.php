@@ -58,10 +58,7 @@ class ItemsController extends Controller
         }else if (isset($request->Unequip)){
 
             $itemtounequip=$request->Unequip;
-            $user_id = Auth::user()->id;
             $returntoslot=ItemsController::verifyavailablebagslot();
-            $Inventoryid = PlayerInventory::where('user_id', '=', $user_id)->value('id');
-            $playerinventory = PlayerInventory::find($Inventoryid);
     
             for ($i = 1; $i <= 15; $i++) {
     
