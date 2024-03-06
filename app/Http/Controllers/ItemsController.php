@@ -54,7 +54,40 @@ class ItemsController extends Controller
             $deleteitem->delete();
 
             return redirect()->route('playerprofile');
-        } else {
+
+        }else if (isset($request->Unequip)){
+
+            $itemtounequip=$request->Unequip;
+            $user_id = Auth::user()->id;
+            $returntoslot=ItemsController::verifyavailablebagslot();
+            $Inventoryid = PlayerInventory::where('user_id', '=', $user_id)->value('id');
+            $playerinventory = PlayerInventory::find($Inventoryid);
+    
+            for ($i = 1; $i <= 15; $i++) {
+    
+                $equipslot = 'equipslot' . strval($i);
+                $equipeditem = PlayerInventory::where($equipslot, '=', $itemtounequip)->value($equipslot);
+                echo $equipeditem;
+    
+                if ($equipeditem == $itemtounequip) {
+                    $playerinventory->$equipslot = null;
+                    break;
+                }
+            }
+    
+            if($returntoslot=='FullBag'){
+    
+            }else{
+                $playerinventory->$returntoslot= $itemtounequip;    
+            }
+    
+    
+            $playerinventory->save();
+            return redirect()->route('playerprofile');
+
+        }
+        
+        else {
 
             $itemtoequip = $request->Equip;
             $verifyownership = Items::where('user_owner_id', '=', $user_id)->value('user_owner_id');

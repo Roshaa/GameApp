@@ -94,6 +94,9 @@
             @for ($i = 0; $i <= 15; $i++)
                 @isset($EquipItemsArray[$i])
                     <div class="w-full border mt-1">
+                        <form action="" method="POST">
+                            @csrf
+                        
                         @if ($EquipItemsArray[$i]->stat1 != '')
                             @switch($class)
                                 @case('Assassin')
@@ -148,6 +151,9 @@
                         @if ($EquipItemsArray[$i]->rarity != '')
                             Rarity: {{ $EquipItemsArray[$i]->rarity }}
                         @endif
+                        <button class="float-end mx-2" type="submit" value="{{ $EquipItemsArray[$i]->id }}"
+                            name="Unequip">Unequip</button>
+                    </form>
                     </div>
                 @endisset
             @endfor
