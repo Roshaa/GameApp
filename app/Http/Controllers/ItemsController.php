@@ -75,11 +75,12 @@ class ItemsController extends Controller
             if($returntoslot=='FullBag'){
     
             }else{
-                $playerinventory->$returntoslot= $itemtounequip;    
+                $playerinventory->$returntoslot= $itemtounequip;
+                $playerinventory->save();    
             }
     
     
-            $playerinventory->save();
+            
             return redirect()->route('playerprofile');
 
         }
