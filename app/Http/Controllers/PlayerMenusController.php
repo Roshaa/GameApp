@@ -17,7 +17,7 @@ class PlayerMenusController extends Controller
     public function chooseclass()
     {
         $user_id = Auth::user()->id;
-        $class = DB::table('user_characters')->where('user_id', '=', $user_id)->value('class');
+        $class = DB::table('user_characters')->where('id', '=', $user_id)->value('class');
         if ($class != '') {
             return redirect()->route('playerprofile');
         }

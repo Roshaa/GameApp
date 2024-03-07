@@ -14,7 +14,9 @@ class UserCharacter extends Model
         'user_id',
         'class',
         'level',
-        'bagslots'
+        'bagslots',
+        'currentlvlexp',
+        'exptonextlevel'
     ];
     
 }

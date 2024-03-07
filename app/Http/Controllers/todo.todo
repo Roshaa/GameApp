@@ -1,4 +1,7 @@
-    ☐  !Criar function para a class de equipar o item ring e professiontool
+    ☐  Cores para a raridade dos items
+    ☐  Nivel to item gerado
+    ☐  Contar items no inventario
+    ☐  Sell All no inventario
     ☐  Combatimprovements, player randomize damage, both not die, overall values
     ☐  Level and exp gains
     ☐  Gold with gains
@@ -8,3 +11,13 @@
     ☐  Javascript com alerta quando se tem que remover um item primeiro antes de equipar
 
     
+
+
+
+    COMBAT Balancing Report:
+    
+    Existe muito mais damage scaling que hp scaling
+    Crit no rogue overtuned
+    Combates teem que ter muito mais hp do que dano atualmente 
+    Resistance undertuned
+    Mainstat scaling overtuned

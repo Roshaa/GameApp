@@ -118,16 +118,13 @@ class ItemsController extends Controller
 
                         for ($i = 6; $i <= 7; $i++) {
 
-                            $user_id = Auth::user()->id;
                             $equipslot = 'equipslot' . strval($i);
                             $verifyslot = PlayerInventory::where('user_id', '=', $user_id)->value($equipslot);
 
-                            if ($verifyslot == '' && $verifyslot != $itemtoequip) {
+                            if ($verifyslot == '' || $verifyslot != '' && $verifyslot != $itemtoequip) {
                                 $replaceitem = $playerinventory->$equipslot;
                                 $playerinventory->$equipslot = $itemtoequip;
                                 break;
-                            }else{
-                                $replaceitem = 'BugAvoid';
                             }
                         }
 
@@ -136,17 +133,14 @@ class ItemsController extends Controller
 
                         for ($i = 8; $i <= 9; $i++) {
 
-                            $user_id = Auth::user()->id;
                             $equipslot = 'equipslot' . strval($i);
                             $verifyslot = PlayerInventory::where('user_id', '=', $user_id)->value($equipslot);
 
-                            if ($verifyslot == '' && $verifyslot != $itemtoequip) {
+                            if ($verifyslot == '' || $verifyslot != '' && $verifyslot != $itemtoequip) {
                                 $replaceitem = $playerinventory->$equipslot;
                                 $playerinventory->$equipslot = $itemtoequip;
                                 break;
-                            }else{
-                                $replaceitem = 'BugAvoid';
-                            }
+                            } 
                         }
                         break;
                 }
@@ -159,15 +153,15 @@ class ItemsController extends Controller
 
                     if ($verifybag == $itemtoequip) {
                         $playerinventory->$bagslotstring = null;
-                        if ($replaceitem != '') {
+                        if (isset($replaceitem) != '') {
                             $playerinventory->$bagslotstring = $replaceitem;
                         }
                     }
                 }
 
-                if($replaceitem!='BugAvoid'){
+
                     $playerinventory->save();
-                }
+                
 
                 return redirect()->route('playerprofile');
             }

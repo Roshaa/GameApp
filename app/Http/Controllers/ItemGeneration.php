@@ -20,8 +20,8 @@ class ItemGeneration extends Controller
     {
 
         $user_id = Auth::user()->id;
-        $class = UserCharacter::where('user_id', '=', $user_id)->value('class');
-        $level = UserCharacter::where('user_id', '=', $user_id)->value('level');
+        $class = UserCharacter::where('id', '=', $user_id)->value('class');
+        $level = UserCharacter::where('id', '=', $user_id)->value('level');
 
         //1 common, 2 uncommon, 3 rare, 4 epic
         //controlar com mob tier no futuro

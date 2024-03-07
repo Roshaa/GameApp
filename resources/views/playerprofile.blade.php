@@ -21,7 +21,11 @@
 
             <div class="mx-10">
 
-                <p class="border-2 rounded border-slate-700 text-center p-5 text-2xl font-medium">{{ $playername }}</p>
+                <div class="border-2 rounded border-slate-700 text-center p-5 font-medium">
+                    <h2 class="text-2xl">{{ $playername }}</h2>
+                    <h5>Level: {{$level}}</h5>
+                
+                </div>
                 @switch($class)
                     @case('Assassin')
                         <img src="images/assassinclass.jpg" class="mt-3" alt="">

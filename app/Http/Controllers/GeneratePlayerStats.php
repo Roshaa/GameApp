@@ -19,8 +19,8 @@ class GeneratePlayerStats extends Controller
     {
 
         $user_id = Auth::user()->id;
-        $class = DB::table('user_characters')->where('user_id', '=', $user_id)->value('class');
-        $level = DB::table('user_characters')->where('user_id', '=', $user_id)->value('level');
+        $class = DB::table('user_characters')->where('id', '=', $user_id)->value('class');
+        $level = DB::table('user_characters')->where('id', '=', $user_id)->value('level');
 
         switch ($class) {
                 //stats base de cada classe
@@ -226,7 +226,8 @@ class GeneratePlayerStats extends Controller
         $user_id = Auth::user()->id;
 
         $playername = DB::table('USERS')->where('id', '=', $user_id)->value('name');
-        $class = DB::table('user_characters')->where('user_id', '=', $user_id)->value('class');
+        $class = DB::table('user_characters')->where('id', '=', $user_id)->value('class');
+        $level = UserCharacter::where('id', '=', $user_id)->value('level');
         $GetStats = GeneratePlayerStats::GenerateStats();
 
         $Inventoryid = PlayerInventory::where('user_id', '=', $user_id)->value('id');
@@ -257,6 +258,7 @@ class GeneratePlayerStats extends Controller
             [
                 'class' => $class,
                 'playername' => $playername,
+                'level'=>$level,
                 'GetStats' => $GetStats,
                 'BagItemsArray' => $BagItemsArray,
                 'EquipItemsArray'=>$EquipItemsArray            ]
@@ -276,6 +278,8 @@ class GeneratePlayerStats extends Controller
         $UserChar->user_id = $user_id;
         $UserChar->class = $optionvalue;
         $UserChar->level = 1;
+        $UserChar->currentlxlexp = 0;
+        $UserChar->exptonextlevel = 5000;
 
         $UserChar->save();
 

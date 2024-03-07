@@ -11,6 +11,7 @@ use App\Http\Controllers\GeneratePlayerStats;
 use App\Http\Controllers\AssassinCombat;
 use App\Http\Controllers\WarlockCombat;
 use App\Http\Controllers\PaladinCombat;
+use App\Http\Controllers\PlayerRewardsGeneration;
 
 use App\Models\mobsmissions;
 use App\Models\UserCharacter;
@@ -26,14 +27,18 @@ class CombatPVE extends Controller
     {
 
         $user_id = Auth::user()->id;
-        $class = UserCharacter::where('user_id', '=', $user_id)->value('class');
-        $level = UserCharacter::where('user_id', '=', $user_id)->value('level');
+        $class = UserCharacter::where('id', '=', $user_id)->value('class');
+        $level = UserCharacter::where('id', '=', $user_id)->value('level');
 
-        $mobname = mobsmissions::where('id', '=', $mobchosen)->value('MobName');
-        $mobhp = mobsmissions::where('id', '=', $mobchosen)->value('BaseHP');
-        $mobdamage = mobsmissions::where('id', '=', $mobchosen)->value('BaseDamage');
-        $mobtier = mobsmissions::where('id', '=', $mobchosen)->value('MobTier');
-        $mobimg = mobsmissions::where('id', '=', $mobchosen)->value('imglink');
+        $mobinfo=mobsmissions::find($mobchosen);
+
+        $mobname = $mobinfo->MobName;
+        $mobhp = $mobinfo->BaseHP;
+        $mobhp=$mobhp+($mobhp*($level*0.7));
+        $mobdamage = $mobinfo->BaseDamage;
+        $mobtier = $mobinfo->MobTier;
+        $mobimg = $mobinfo->imglink;
+        $mobexp=$mobinfo->mobexp;
 
         $getstats = GeneratePlayerStats::GenerateStats();
         extract($getstats);
@@ -92,6 +97,8 @@ class CombatPVE extends Controller
         if ($mobhp <= 0) {
 
             ItemGeneration::missionitemgeneration();
+            PlayerRewardsGeneration::expreward($mobexp);
+
         }
 
 
