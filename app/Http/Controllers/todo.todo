@@ -1,10 +1,10 @@
-    ☐  !Resolver bug ao equipar item em slots com mais de 1 slot para esse tipo, ex: ring
+    ☐  !Criar function para a class de equipar o item ring e professiontool
     ☐  Combatimprovements, player randomize damage, both not die, overall values
     ☐  Level and exp gains
     ☐  Gold with gains
     ☐  1st Shop
     ☐  combat improvements
     ☐  potions
-
+    ☐  Javascript com alerta quando se tem que remover um item primeiro antes de equipar
 
     

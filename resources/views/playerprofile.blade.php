@@ -94,7 +94,7 @@
         </div>
 
         <div class="w-9/12 mt-5 text-white mr-10">
-            <h1 class="text-2xl mb-5 border-b-2">Equipped</h1>
+            <h1 class="text-2xl mb-5 border-t-2">Equipped</h1>
                 <form class="" action="" method="POST">
                 @for ($i = 0; $i <= 15; $i++)
                     @isset($EquipItemsArray[$i])
@@ -185,9 +185,6 @@
                             @if ($EquipItemsArray[$i]->specialeffect4 != '')
                                 SE4: {{ $EquipItemsArray[$i]->specialeffect4 }}
                             @endif
-                            @if ($EquipItemsArray[$i]->type != '')
-                                Type: {{ $EquipItemsArray[$i]->type }}
-                            @endif
                             @if ($EquipItemsArray[$i]->rarity != '')
                                 Rarity: {{ $EquipItemsArray[$i]->rarity }}
                             @endif
@@ -203,7 +200,7 @@
 
 
             <div class="mt-4 w-full">
-                <h1 class="text-2xl mt-10 border-b-2 mb-3">Inventory</h1>
+                <h1 class="text-2xl mt-10 border-t-2 mb-3">Inventory</h1>
                 {{-- Alterar para uma table no futuro --}}
                 <form action="" method="POST">
                 @for ($i = 1; $i <= 10; $i++)
@@ -294,9 +291,6 @@
                             @endif
                             @if ($BagItemsArray[$i]->specialeffect4 != '')
                                 SE4: {{ $BagItemsArray[$i]->specialeffect4 }}
-                            @endif
-                            @if ($BagItemsArray[$i]->type != '')
-                                Type: {{ $BagItemsArray[$i]->type }}
                             @endif
                             @if ($BagItemsArray[$i]->rarity != '')
                                 Rarity: {{ $BagItemsArray[$i]->rarity }}

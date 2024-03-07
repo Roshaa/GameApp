@@ -126,6 +126,8 @@ class ItemsController extends Controller
                                 $replaceitem = $playerinventory->$equipslot;
                                 $playerinventory->$equipslot = $itemtoequip;
                                 break;
+                            }else{
+                                $replaceitem = 'BugAvoid';
                             }
                         }
 
@@ -142,6 +144,8 @@ class ItemsController extends Controller
                                 $replaceitem = $playerinventory->$equipslot;
                                 $playerinventory->$equipslot = $itemtoequip;
                                 break;
+                            }else{
+                                $replaceitem = 'BugAvoid';
                             }
                         }
                         break;
@@ -161,7 +165,10 @@ class ItemsController extends Controller
                     }
                 }
 
-                $playerinventory->save();
+                if($replaceitem!='BugAvoid'){
+                    $playerinventory->save();
+                }
+
                 return redirect()->route('playerprofile');
             }
         }
