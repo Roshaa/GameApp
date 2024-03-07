@@ -133,7 +133,7 @@
                                 @default
                             @endswitch
                                 " alt="">
-                                <button class="ml-2">
+                                <button disabled class="ml-2">
 
 
 
@@ -243,7 +243,7 @@
                                 @default
                             @endswitch
                                 " alt="">
-                                <button class="ml-2">
+                                <button disabled class="ml-2">
 
 
 
