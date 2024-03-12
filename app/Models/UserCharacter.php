@@ -16,7 +16,8 @@ class UserCharacter extends Model
         'level',
         'bagslots',
         'currentlvlexp',
-        'exptonextlevel'
+        'exptonextlevel',
+        'gold'
     ];
     
 }

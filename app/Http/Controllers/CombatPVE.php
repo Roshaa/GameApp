@@ -38,7 +38,10 @@ class CombatPVE extends Controller
         $mobdamage = $mobinfo->BaseDamage;
         $mobtier = $mobinfo->MobTier;
         $mobimg = $mobinfo->imglink;
+        
         $mobexp=$mobinfo->mobexp;
+        $incrementalexp=$level*0.05;
+        $mobexp=$mobexp*(1+$incrementalexp);
 
         $getstats = GeneratePlayerStats::GenerateStats();
         extract($getstats);

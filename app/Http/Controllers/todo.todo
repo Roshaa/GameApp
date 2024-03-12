@@ -1,14 +1,17 @@
-    ☐  Combatimprovements, player randomize damage, both not die(unkown bug), overall values
-    ☐  Level and exp gains
-    ☐  Gold with gains
+
+    ☐  raridade baseado no mob tier
     ☐  Sell All no inventario
     ☐  1st Shop
+
+    ☐  laravel migrations
+    ☐  1st Dungeon
+
     ☐  combat improvements
     ☐  potions
 
 
 
-    COMBAT Balancing Status:
+    COMBAT Balancing Status 09/03:
     
     Existe muito mais damage scaling que hp scaling
     Crit no rogue overtuned

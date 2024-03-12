@@ -14,6 +14,7 @@ class PaladinCombat extends Controller
         extract($gettruestats);
 
         $damage = "$damage";
+        $damage = $damage*0.7 + ($damage / rand(3, 5));
         $skilldamage = "$skilldamage";
 
 

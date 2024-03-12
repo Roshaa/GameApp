@@ -14,6 +14,7 @@ class WarlockCombat extends Controller
         extract($gettruestats);
 
         $damage = "$damage";
+        $damage = $damage*0.7 + ($damage / rand(3, 5));
         $skilldamage = "$skilldamage";
 
         //Este classpecial é para interagir com as futuras skills que de momento não estão disponiveis

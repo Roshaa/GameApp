@@ -16,6 +16,8 @@ class PlayerRewardsGeneration extends Controller
 
         $exp=$exp+($exp*($level/8));
         $CharacterInfo->currentlvlexp=$CharacterInfo->currentlvlexp+$exp;
+        $gold=($exp+($exp*($level/5)))/100;
+        $CharacterInfo->gold=$CharacterInfo->gold+$gold;
 
         if($CharacterInfo->currentlvlexp>=$CharacterInfo->exptonextlevel){
             $CharacterInfo->currentlvlexp=0;

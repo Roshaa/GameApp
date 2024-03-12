@@ -227,7 +227,7 @@ class GeneratePlayerStats extends Controller
 
         $playername = DB::table('USERS')->where('id', '=', $user_id)->value('name');
         $class = DB::table('user_characters')->where('id', '=', $user_id)->value('class');
-        $level = UserCharacter::where('id', '=', $user_id)->value('level');
+        $CharInfo = UserCharacter::where('id', '=', $user_id)->get(); 
         $GetStats = GeneratePlayerStats::GenerateStats();
 
         $Inventoryid = PlayerInventory::where('user_id', '=', $user_id)->value('id');
@@ -262,11 +262,11 @@ class GeneratePlayerStats extends Controller
             [
                 'class' => $class,
                 'playername' => $playername,
-                'level'=>$level,
                 'GetStats' => $GetStats,
                 'BagItemsArray' => $BagItemsArray,
                 'EquipItemsArray'=>$EquipItemsArray,
-                'BagSlots'=>$BagSlots
+                'BagSlots'=>$BagSlots,
+                'CharInfo'=>$CharInfo   
                 ]
         );
     }

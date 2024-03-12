@@ -23,7 +23,7 @@
 
                 <div class="border-2 rounded border-slate-700 text-center p-5 font-medium">
                     <h2 class="text-2xl">{{ $playername }}</h2>
-                    <h5>Level: {{ $level }}</h5>
+                    <h5>Level: {{ $CharInfo[0]->level }}</h5>
 
                 </div>
                 @switch($class)
@@ -204,9 +204,16 @@
 
             </form>
 
+<div class="flex w-full h-12 text-2xl border-t-2 mb-3 mt-10 justify-start text-center">
+
+    <h1 class="text-2xl mr-auto">Inventory      {{$BagSlots}} / 10 Slots</h1>
+    <div class="h-12 flex ml-auto"><button class="h-12 w-12" disabled>{{$CharInfo[0]->gold}}</button><img class="h-12 w-12" src="images/icons/two-coins.svg" alt=""></div> 
+    
+</div>
+            
 
             <div class="mt-4 w-full">
-                <h1 class="text-2xl mt-10 border-t-2 mb-3">Inventory <span class="float-end">{{$BagSlots}} / 10</span></h1>
+
                 {{-- Alterar para uma table no futuro --}}
                 <form action="" method="POST">
                     @for ($i = 1; $i <= 10; $i++)
