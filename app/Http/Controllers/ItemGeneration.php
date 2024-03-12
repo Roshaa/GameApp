@@ -119,10 +119,10 @@ class ItemGeneration extends Controller
         $Items->rarity = $itemrarityroll;
 
         if ($itemtype == 'Head' || $itemtype == 'Chest' || $itemtype == 'Gloves' || $itemtype == 'Boots') {
-            $Items->armor = rand($level * 30, $level * 50);
+            $Items->armor = rand($level * 10, $level * 20);
         }
         if ($itemtype == 'Weapon') {
-            $Items->damage = rand($level * 15, $level * 25);
+            $Items->damage = rand($level * 15, $level * 20);
         }
 
 

@@ -52,7 +52,7 @@ class GeneratePlayerStats extends Controller
                     //Librarian
                     0,
                     //BaseHP
-                    200,
+                    500,
                     //BaseDamage
                     30
                 ];
@@ -86,7 +86,7 @@ class GeneratePlayerStats extends Controller
                     //Librarian
                     0,
                     //BaseHP
-                    360,
+                    700,
                     //BaseDamage
                     20
                 ];
@@ -120,7 +120,7 @@ class GeneratePlayerStats extends Controller
                     //Librarian
                     0,
                     //BaseHP
-                    200,
+                    400,
                     //BaseDamage
                     80
                 ];
@@ -153,7 +153,7 @@ class GeneratePlayerStats extends Controller
                 //No futuro cada Classe podera ter a sua class em codigo
             case 'Assassin':
 
-                $hp = $statsarray[11] + ($level * 20 + $Constituion * 5);
+                $hp = $statsarray[11] + ($level * 50 + $Constituion * 8);
                 $damage = $statsarray[12]+($valuefromitems['damage']*1.1) + $mainstat / 2;
                 $skilldamage = 100 + $Willpower + ($Mastery / 3);
                 $armor= $valuefromitems['armor'];
@@ -162,12 +162,12 @@ class GeneratePlayerStats extends Controller
 
                 //Critical strike for assassin
                 //Base 20%
-                $ClassSpecial = 20 + $Expertise + ($Mastery / 3) / $level;
+                $ClassSpecial = 20 + ($Expertise+($Mastery / 3) )/($level/2);
 
                 break;
             case 'Paladin':
 
-                $hp = $statsarray[11] + ($level * 30 + $Constituion * 7);
+                $hp = $statsarray[11] + ($level * 80 + $Constituion * 10);
                 $damage = $statsarray[12]+($valuefromitems['damage']*0.8) + $mainstat / 2;
                 $skilldamage = 100 + $Willpower + ($Mastery / 3);
                 $armor= $valuefromitems['armor']*1.2;
@@ -181,7 +181,7 @@ class GeneratePlayerStats extends Controller
                 break;
             case 'Warlock':
 
-                $hp = $statsarray[11] + ($level * 15 + $Constituion * 4);
+                $hp = $statsarray[11] + ($level * 40 + $Constituion * 7);
                 $damage = $statsarray[12] +($valuefromitems['damage']*1.5)+ $mainstat / 2;
                 $skilldamage = 100 + $Willpower + ($Mastery / 3);
                 $armor= $valuefromitems['armor']*0.8;
@@ -234,11 +234,15 @@ class GeneratePlayerStats extends Controller
         $InventoryInfo = PlayerInventory::find($Inventoryid);
 
         $BagItemsArray = [];
+        $BagSlots=0;
 
         for ($i = 0; $i <= 10; $i++) {
 
             $bagslot = 'bagslot' . strval($i);
             $ItemId = $InventoryInfo->$bagslot;
+            if($ItemId!=''){
+                $BagSlots++;
+            }
             $ItemInfo = Items::find($ItemId);
             array_push($BagItemsArray, $ItemInfo);
         };
@@ -261,7 +265,9 @@ class GeneratePlayerStats extends Controller
                 'level'=>$level,
                 'GetStats' => $GetStats,
                 'BagItemsArray' => $BagItemsArray,
-                'EquipItemsArray'=>$EquipItemsArray            ]
+                'EquipItemsArray'=>$EquipItemsArray,
+                'BagSlots'=>$BagSlots
+                ]
         );
     }
 

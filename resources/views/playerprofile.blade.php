@@ -206,7 +206,7 @@
 
 
             <div class="mt-4 w-full">
-                <h1 class="text-2xl mt-10 border-t-2 mb-3">Inventory</h1>
+                <h1 class="text-2xl mt-10 border-t-2 mb-3">Inventory <span class="float-end">{{$BagSlots}} / 10</span></h1>
                 {{-- Alterar para uma table no futuro --}}
                 <form action="" method="POST">
                     @for ($i = 1; $i <= 10; $i++)
