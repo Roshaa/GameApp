@@ -1,5 +1,3 @@
-    ☐  Cores para a raridade dos items
-    ☐  Alterar a view do player missions com um isset e apagar a blade do mission result
     ☐  Nivel to item gerado
     ☐  Contar items no inventario
     ☐  Sell All no inventario
@@ -22,3 +20,4 @@
     Combates teem que ter muito mais hp do que dano atualmente 
     Resistance undertuned
     Mainstat scaling overtuned
+    armor overtuned

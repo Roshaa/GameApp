@@ -43,7 +43,7 @@ class CombatPVE extends Controller
         $getstats = GeneratePlayerStats::GenerateStats();
         extract($getstats);
         $playerhp = "$hp";
-
+        $playerhp=str_replace(",","",$playerhp);
 
 
         while ($mobhp >= 0 && $playerhp >= 0) {

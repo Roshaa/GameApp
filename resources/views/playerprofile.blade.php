@@ -23,8 +23,8 @@
 
                 <div class="border-2 rounded border-slate-700 text-center p-5 font-medium">
                     <h2 class="text-2xl">{{ $playername }}</h2>
-                    <h5>Level: {{$level}}</h5>
-                
+                    <h5>Level: {{ $level }}</h5>
+
                 </div>
                 @switch($class)
                     @case('Assassin')
@@ -99,107 +99,109 @@
 
         <div class="w-9/12 mt-5 text-white mr-10">
             <h1 class="text-2xl mb-5 border-t-2">Equipped</h1>
-                <form class="" action="" method="POST">
+            <form class="" action="" method="POST">
                 @for ($i = 0; $i <= 15; $i++)
                     @isset($EquipItemsArray[$i])
-                    @csrf                 
-                            <div class="h-12 w-full flex border-b-2">
-                                <img class="" src="
+                        @csrf
+                        <div class="h-12 w-full flex border-b-2">
+                            <img class=""
+                                src="
                                 @switch($EquipItemsArray[$i]->type)
                                 @case('Head')
-                                    {{"images/icons/elf-helmet.svg" }}
+                                    {{ 'images/icons/elf-helmet.svg' }}
                                 @break
                             
                                 @case('Chest')
-                                    {{"images/icons/chest-armor.svg" }}
+                                    {{ 'images/icons/chest-armor.svg' }}
                                 @break
                             
                                 @case('Gloves')
-                                    {{"images/icons/gloves.svg" }}
+                                    {{ 'images/icons/gloves.svg' }}
                                 @break
                             
                                 @case('Boots')
-                                    {{"images/icons/leg-armor.svg" }}
+                                    {{ 'images/icons/leg-armor.svg' }}
                                 @break
                             
                                 @case('Weapon')
-                                    {{"images/icons/sword-wound.svg" }}
+                                    {{ 'images/icons/sword-wound.svg' }}
                                 @break
                             
                                 @case('Ring')
-                                    {{"images/icons/ring.svg" }}
+                                    {{ 'images/icons/ring.svg' }}
                                 @break
                             
                                 @case('ProfessionTool')
-                                    {{"images/icons/anvil-impact.svg" }}
+                                    {{ 'images/icons/anvil-impact.svg' }}
                                 @break
                             
                                 @default
                             @endswitch
-                                " alt="">
-                                <button disabled class="ml-2">
+                                "
+                                alt="">
+                            <button disabled class="ml-2 w-full text-left">
 
 
 
-                            @if ($EquipItemsArray[$i]->stat1 != '')
-                                @switch($class)
-                                    @case('Assassin')
-                                        {{ 'DEX: ' }}
-                                    @break
+                                @if ($EquipItemsArray[$i]->stat1 != '')
+                                    @switch($class)
+                                        @case('Assassin')
+                                            {{ 'DEX: ' }}
+                                        @break
 
-                                    @case('Paladin')
-                                        {{ 'STR: ' }}
-                                    @break
+                                        @case('Paladin')
+                                            {{ 'STR: ' }}
+                                        @break
 
-                                    @case('Warlock')
-                                        {{ 'INT: ' }}
-                                    @break
-                                @endswitch {{ $EquipItemsArray[$i]->stat1 }}
-                            @endif
-                            @if ($EquipItemsArray[$i]->stat2 != '')
-                                WLP: {{ $EquipItemsArray[$i]->stat2 }}
-                            @endif
-                            @if ($EquipItemsArray[$i]->stat3 != '')
-                                CON: {{ $EquipItemsArray[$i]->stat3 }}
-                            @endif
-                            @if ($EquipItemsArray[$i]->stat4 != '')
-                                EXP: {{ $EquipItemsArray[$i]->stat4 }}
-                            @endif
-                            @if ($EquipItemsArray[$i]->stat5 != '')
-                                RES: {{ $EquipItemsArray[$i]->stat5 }}
-                            @endif
-                            @if ($EquipItemsArray[$i]->stat6 != '')
-                                MAS: {{ $EquipItemsArray[$i]->stat6 }}
-                            @endif
-                            @if ($EquipItemsArray[$i]->armor != '')
-                                AR: {{ $EquipItemsArray[$i]->armor }}
-                            @endif
-                            @if ($EquipItemsArray[$i]->damage != '')
-                                DAM: {{ $EquipItemsArray[$i]->damage }}
-                            @endif
-                            @if ($EquipItemsArray[$i]->specialeffect1 != '')
-                                SE1: {{ $EquipItemsArray[$i]->specialeffect1 }}
-                            @endif
-                            @if ($EquipItemsArray[$i]->specialeffect2 != '')
-                                SE2: {{ $EquipItemsArray[$i]->specialeffect2 }}
-                            @endif
-                            @if ($EquipItemsArray[$i]->specialeffect3 != '')
-                                SE3: {{ $EquipItemsArray[$i]->specialeffect3 }}
-                            @endif
-                            @if ($EquipItemsArray[$i]->specialeffect4 != '')
-                                SE4: {{ $EquipItemsArray[$i]->specialeffect4 }}
-                            @endif
-                            @if ($EquipItemsArray[$i]->rarity != '')
-                                Rarity: {{ $EquipItemsArray[$i]->rarity }}
-                            @endif
-                        </button>
+                                        @case('Warlock')
+                                            {{ 'INT: ' }}
+                                        @break
+                                    @endswitch {{ $EquipItemsArray[$i]->stat1 }}
+                                @endif
+                                @if ($EquipItemsArray[$i]->stat2 != '')
+                                    WLP: {{ $EquipItemsArray[$i]->stat2 }}
+                                @endif
+                                @if ($EquipItemsArray[$i]->stat3 != '')
+                                    CON: {{ $EquipItemsArray[$i]->stat3 }}
+                                @endif
+                                @if ($EquipItemsArray[$i]->stat4 != '')
+                                    EXP: {{ $EquipItemsArray[$i]->stat4 }}
+                                @endif
+                                @if ($EquipItemsArray[$i]->stat5 != '')
+                                    RES: {{ $EquipItemsArray[$i]->stat5 }}
+                                @endif
+                                @if ($EquipItemsArray[$i]->stat6 != '')
+                                    MAS: {{ $EquipItemsArray[$i]->stat6 }}
+                                @endif
+                                @if ($EquipItemsArray[$i]->armor != '')
+                                    AR: {{ $EquipItemsArray[$i]->armor }}
+                                @endif
+                                @if ($EquipItemsArray[$i]->damage != '')
+                                    DAM: {{ $EquipItemsArray[$i]->damage }}
+                                @endif
+                                @if ($EquipItemsArray[$i]->specialeffect1 != '')
+                                    SE1: {{ $EquipItemsArray[$i]->specialeffect1 }}
+                                @endif
+                                @if ($EquipItemsArray[$i]->specialeffect2 != '')
+                                    SE2: {{ $EquipItemsArray[$i]->specialeffect2 }}
+                                @endif
+                                @if ($EquipItemsArray[$i]->specialeffect3 != '')
+                                    SE3: {{ $EquipItemsArray[$i]->specialeffect3 }}
+                                @endif
+                                @if ($EquipItemsArray[$i]->specialeffect4 != '')
+                                    SE4: {{ $EquipItemsArray[$i]->specialeffect4 }}
+                                @endif
+                                @if ($EquipItemsArray[$i]->rarity != '')
+                                    <span
+                                        class="mr-5 float-end item{{ $EquipItemsArray[$i]->rarity }}">{{ $EquipItemsArray[$i]->rarity }}</span>
+                                @endif
+                            </button>
                             <button class="mx-2 ml-auto" type="submit" value="{{ $EquipItemsArray[$i]->id }}"
                                 name="Unequip">Unequip</button>
-                            </div>
+                        </div>
                     @endisset
-
                 @endfor
-                            
+
             </form>
 
 
@@ -207,107 +209,110 @@
                 <h1 class="text-2xl mt-10 border-t-2 mb-3">Inventory</h1>
                 {{-- Alterar para uma table no futuro --}}
                 <form action="" method="POST">
-                @for ($i = 1; $i <= 10; $i++)
+                    @for ($i = 1; $i <= 10; $i++)
                         @csrf
                         @isset($BagItemsArray[$i])
                             <div class="h-12 w-full border-b-2 flex">
-                                <img class="" src="
+                                <img class=""
+                                    src="
                                 @switch($BagItemsArray[$i]->type)
                                 @case('Head')
-                                    {{"images/icons/elf-helmet.svg" }}
+                                    {{ 'images/icons/elf-helmet.svg' }}
                                 @break
                             
                                 @case('Chest')
-                                    {{"images/icons/chest-armor.svg" }}
+                                    {{ 'images/icons/chest-armor.svg' }}
                                 @break
                             
                                 @case('Gloves')
-                                    {{"images/icons/gloves.svg" }}
+                                    {{ 'images/icons/gloves.svg' }}
                                 @break
                             
                                 @case('Boots')
-                                    {{"images/icons/leg-armor.svg" }}
+                                    {{ 'images/icons/leg-armor.svg' }}
                                 @break
                             
                                 @case('Weapon')
-                                    {{"images/icons/sword-wound.svg" }}
+                                    {{ 'images/icons/sword-wound.svg' }}
                                 @break
                             
                                 @case('Ring')
-                                    {{"images/icons/ring.svg" }}
+                                    {{ 'images/icons/ring.svg' }}
                                 @break
                             
                                 @case('ProfessionTool')
-                                    {{"images/icons/anvil-impact.svg" }}
+                                    {{ 'images/icons/anvil-impact.svg' }}
                                 @break
                             
                                 @default
                             @endswitch
-                                " alt="">
-                                <button disabled class="ml-2">
+                                "
+                                    alt="">
+                                <button disabled class="ml-2 w-full text-left">
 
 
 
-                            @if ($BagItemsArray[$i]->stat1 != '')
-                                @switch($class)
-                                    @case('Assassin')
-                                        {{ 'DEX: ' }}
-                                    @break
+                                    @if ($BagItemsArray[$i]->stat1 != '')
+                                        @switch($class)
+                                            @case('Assassin')
+                                                {{ 'DEX: ' }}
+                                            @break
 
-                                    @case('Paladin')
-                                        {{ 'STR: ' }}
-                                    @break
+                                            @case('Paladin')
+                                                {{ 'STR: ' }}
+                                            @break
 
-                                    @case('Warlock')
-                                        {{ 'INT: ' }}
-                                    @break
-                                @endswitch {{ $BagItemsArray[$i]->stat1 }}
-                            @endif
-                            @if ($BagItemsArray[$i]->stat2 != '')
-                                WLP: {{ $BagItemsArray[$i]->stat2 }}
-                            @endif
-                            @if ($BagItemsArray[$i]->stat3 != '')
-                                CON: {{ $BagItemsArray[$i]->stat3 }}
-                            @endif
-                            @if ($BagItemsArray[$i]->stat4 != '')
-                                EXP: {{ $BagItemsArray[$i]->stat4 }}
-                            @endif
-                            @if ($BagItemsArray[$i]->stat5 != '')
-                                RES: {{ $BagItemsArray[$i]->stat5 }}
-                            @endif
-                            @if ($BagItemsArray[$i]->stat6 != '')
-                                MAS: {{ $BagItemsArray[$i]->stat6 }}
-                            @endif
-                            @if ($BagItemsArray[$i]->armor != '')
-                                AR: {{ $BagItemsArray[$i]->armor }}
-                            @endif
-                            @if ($BagItemsArray[$i]->damage != '')
-                                DAM: {{ $BagItemsArray[$i]->damage }}
-                            @endif
-                            @if ($BagItemsArray[$i]->specialeffect1 != '')
-                                SE1: {{ $BagItemsArray[$i]->specialeffect1 }}
-                            @endif
-                            @if ($BagItemsArray[$i]->specialeffect2 != '')
-                                SE2: {{ $BagItemsArray[$i]->specialeffect2 }}
-                            @endif
-                            @if ($BagItemsArray[$i]->specialeffect3 != '')
-                                SE3: {{ $BagItemsArray[$i]->specialeffect3 }}
-                            @endif
-                            @if ($BagItemsArray[$i]->specialeffect4 != '')
-                                SE4: {{ $BagItemsArray[$i]->specialeffect4 }}
-                            @endif
-                            @if ($BagItemsArray[$i]->rarity != '')
-                                Rarity: {{ $BagItemsArray[$i]->rarity }}
-                            @endif
+                                            @case('Warlock')
+                                                {{ 'INT: ' }}
+                                            @break
+                                        @endswitch {{ $BagItemsArray[$i]->stat1 }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->stat2 != '')
+                                        WLP: {{ $BagItemsArray[$i]->stat2 }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->stat3 != '')
+                                        CON: {{ $BagItemsArray[$i]->stat3 }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->stat4 != '')
+                                        EXP: {{ $BagItemsArray[$i]->stat4 }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->stat5 != '')
+                                        RES: {{ $BagItemsArray[$i]->stat5 }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->stat6 != '')
+                                        MAS: {{ $BagItemsArray[$i]->stat6 }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->armor != '')
+                                        AR: {{ $BagItemsArray[$i]->armor }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->damage != '')
+                                        DAM: {{ $BagItemsArray[$i]->damage }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->specialeffect1 != '')
+                                        SE1: {{ $BagItemsArray[$i]->specialeffect1 }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->specialeffect2 != '')
+                                        SE2: {{ $BagItemsArray[$i]->specialeffect2 }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->specialeffect3 != '')
+                                        SE3: {{ $BagItemsArray[$i]->specialeffect3 }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->specialeffect4 != '')
+                                        SE4: {{ $BagItemsArray[$i]->specialeffect4 }}
+                                    @endif
+                                    @if ($BagItemsArray[$i]->rarity != '')
+                                        <span class="mr-5 float-end item{{ $BagItemsArray[$i]->rarity }}">
+                                            {{ $BagItemsArray[$i]->rarity }}</span>
+                                    @endif
 
-                            <button class="ml-auto mr-2" type="submit" value="{{ $BagItemsArray[$i]->id }}"
-                                name="Equip">Equip</button>
-                            <button class="" type="submit" value="{{ $BagItemsArray[$i]->id }}"
-                                name="Delete">Delete</button>
+                                    <button class="ml-auto mr-2" type="submit" value="{{ $BagItemsArray[$i]->id }}"
+                                        name="Equip">Equip</button>
+                                    <button class="" type="submit" value="{{ $BagItemsArray[$i]->id }}"
+                                        name="Delete">Delete</button>
                             </div>
                         @endisset
-                @endfor
-            </form>
+                    @endfor
+                </form>
 
             </div>
 

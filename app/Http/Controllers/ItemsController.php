@@ -115,33 +115,17 @@ class ItemsController extends Controller
                         $playerinventory->equipslot5 = $itemtoequip;
                         break;
                     case 'ProfessionTool':
-
-                        for ($i = 6; $i <= 7; $i++) {
-
-                            $equipslot = 'equipslot' . strval($i);
-                            $verifyslot = PlayerInventory::where('user_id', '=', $user_id)->value($equipslot);
-
-                            if ($verifyslot == '' || $verifyslot != '' && $verifyslot != $itemtoequip) {
-                                $replaceitem = $playerinventory->$equipslot;
-                                $playerinventory->$equipslot = $itemtoequip;
-                                break;
-                            }
-                        }
+                        $a=6;   
+                        $b=7;
+                        $replaceitem=ItemsController::replacecorrectitem($a,$b, $playerinventory, $itemtoequip, $user_id);
+                    
 
                         break;
                     case 'Ring':
-
-                        for ($i = 8; $i <= 9; $i++) {
-
-                            $equipslot = 'equipslot' . strval($i);
-                            $verifyslot = PlayerInventory::where('user_id', '=', $user_id)->value($equipslot);
-
-                            if ($verifyslot == '' || $verifyslot != '' && $verifyslot != $itemtoequip) {
-                                $replaceitem = $playerinventory->$equipslot;
-                                $playerinventory->$equipslot = $itemtoequip;
-                                break;
-                            } 
-                        }
+                        $a=8;
+                        $b=9;
+                        $replaceitem=ItemsController::replacecorrectitem($a,$b, $playerinventory, $itemtoequip, $user_id);
+                        
                         break;
                 }
 
@@ -238,4 +222,23 @@ class ItemsController extends Controller
 
         return $statsfromitems;
     }
+
+
+    private static function replacecorrectitem($a,$b, $playerinventory, $itemtoequip,$user_id){
+        for ($i = $a; $i <= $b; $i++) {
+        $equipslot = 'equipslot' . strval($i);
+        $verifyslot = PlayerInventory::where('user_id', '=', $user_id)->value($equipslot);
+
+        if ($verifyslot == '' ) {
+            $replaceitem = $playerinventory->$equipslot;
+            $playerinventory->$equipslot = $itemtoequip;
+            return $replaceitem;
+        }else if($verifyslot != '' && $i == $b) {
+            $replaceitem = $playerinventory->$equipslot;
+            $playerinventory->$equipslot = $itemtoequip;
+            return $replaceitem;
+    }
+     
+    }
+}
 }

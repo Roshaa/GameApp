@@ -21,6 +21,18 @@
     .btn{
         @apply w-full text-center h-16 hover:text-3xl hover:text-white hover:border-t-2 hover:border-b-2
     }
+    .itemcommon{
+        @apply text-stone-500
+    }
+    .itemuncommon{
+        @apply text-lime-400	
+    }
+    .itemrare{
+        @apply text-cyan-500	
+    }
+    .itemepic{
+        @apply text-fuchsia-600
+    }
 
   </style>
   {{-- blade-formatter-enable --}}
