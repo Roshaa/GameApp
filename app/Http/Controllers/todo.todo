@@ -1,7 +1,10 @@
 
-    ☐  raridade baseado no mob tier
-    ☐  Sell All no inventario
-    ☐  1st Shop
+    ☐  1st Shop with upgrades
+
+
+    ☐ Combat log
+    ☐ Item generated in combat log
+    ☐ replay mission
 
     ☐  laravel migrations
     ☐  1st Dungeon
@@ -11,11 +14,6 @@
 
 
 
-    COMBAT Balancing Status 09/03:
+    COMBAT Balancing Status:
     
-    Existe muito mais damage scaling que hp scaling
-    Crit no rogue overtuned
-    Combates teem que ter muito mais hp do que dano atualmente 
-    Resistance undertuned
-    Mainstat scaling overtuned
-    Armor overtuned
+   

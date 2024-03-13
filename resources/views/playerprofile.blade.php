@@ -207,7 +207,7 @@
 <div class="flex w-full h-12 text-2xl border-t-2 mb-3 mt-10 justify-start text-center">
 
     <h1 class="text-2xl mr-auto">Inventory      {{$BagSlots}} / 10 Slots</h1>
-    <div class="h-12 flex ml-auto"><button class="h-12 w-12" disabled>{{$CharInfo[0]->gold}}</button><img class="h-12 w-12" src="images/icons/two-coins.svg" alt=""></div> 
+    <div class="h-12 flex ml-auto"><button class="h-12 w-12 mr-5" disabled>{{$CharInfo[0]->gold}}</button><img class="h-12 w-12" src="images/icons/two-coins.svg" alt=""></div> 
     
 </div>
             
@@ -311,7 +311,14 @@
                                         <span class="mr-5 float-end item{{ $BagItemsArray[$i]->rarity }}">
                                             {{ $BagItemsArray[$i]->rarity }}</span>
                                     @endif
+                                    @if ($BagItemsArray[$i]->value != '')
+                                        <span class="mr-5 float-end">Value:
+                                            {{ $BagItemsArray[$i]->value }}</span>
+                                    @endif
+                                    
 
+                                    <button class="ml-auto mr-2" type="submit" value="{{ $BagItemsArray[$i]->id }}"
+                                        name="Sell">Sell</button>
                                     <button class="ml-auto mr-2" type="submit" value="{{ $BagItemsArray[$i]->id }}"
                                         name="Equip">Equip</button>
                                     <button class="" type="submit" value="{{ $BagItemsArray[$i]->id }}"
@@ -321,6 +328,12 @@
                     @endfor
                 </form>
 
+            </div>
+            <div class="flex w-full mt-5">
+                <form action="" method="POST">
+                    @csrf
+                    <button type="submit" name="SellAll" value="SellAll">Sell All</button>
+                </form>
             </div>
 
         </div>

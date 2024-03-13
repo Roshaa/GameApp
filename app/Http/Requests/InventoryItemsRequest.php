@@ -24,7 +24,9 @@ class InventoryItemsRequest extends FormRequest
         return [
         'Equip',
         'Unequip',
-        'Delete'
+        'Delete',
+        'Sell',
+        'SellAll'
         ];
     }
 }

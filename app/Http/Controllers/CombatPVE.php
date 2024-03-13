@@ -99,7 +99,7 @@ class CombatPVE extends Controller
 
         if ($mobhp <= 0) {
 
-            ItemGeneration::missionitemgeneration();
+            ItemGeneration::missionitemgeneration($mobtier);
             PlayerRewardsGeneration::expreward($mobexp);
 
         }

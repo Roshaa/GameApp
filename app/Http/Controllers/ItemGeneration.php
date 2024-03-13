@@ -16,7 +16,7 @@ class ItemGeneration extends Controller
 {
 
     //Gera um item aleatorio e grava no inventario do jogador, na altura em que isto está ser escrito so funciona para os 3 mobs nas missoes
-    public static function missionitemgeneration()
+    public static function missionitemgeneration($mobtier)
     {
 
         $user_id = Auth::user()->id;
@@ -26,6 +26,7 @@ class ItemGeneration extends Controller
         //1 common, 2 uncommon, 3 rare, 4 epic
         //controlar com mob tier no futuro
         $itemrarityroll = rand(0, 99);
+        if(($mobtier=2)){$itemrarityroll=rand(51, 99);}
         switch ($itemrarityroll) {
             case $itemrarityroll <= 50:
                 $itemrarityroll = 'common';
@@ -51,6 +52,7 @@ class ItemGeneration extends Controller
             return rand($level * 3.5, $level * 6);
         }
 
+        $itemvalue=getrandomstatvalue($level)*0.8;
         $getrandomitemtype = rand(1, 7);
 
         /*
@@ -117,6 +119,7 @@ class ItemGeneration extends Controller
         $Items->itemname = 'NoName';
         $Items->type = $itemtype;
         $Items->rarity = $itemrarityroll;
+        $Items->value=$itemvalue;
 
         if ($itemtype == 'Head' || $itemtype == 'Chest' || $itemtype == 'Gloves' || $itemtype == 'Boots') {
             $Items->armor = rand($level * 10, $level * 20);
