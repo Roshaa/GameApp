@@ -12,6 +12,7 @@ use App\Http\Requests\ChooseClassRequest;
 use App\Models\UserCharacter;
 
 
+
 class GeneratePlayerStats extends Controller
 {
 

@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\MissionOptionRequest;
+use App\Models\UserCharacter;
+use App\Models\player_shop;
 
 class PlayerMenusController extends Controller
 {
@@ -47,6 +44,22 @@ class PlayerMenusController extends Controller
                 'mobimg' => "$mobimg",
                 'playermissinghp' => "$playermissinghp",
                 'mobmissinghp' => "$mobmissinghp",
+            ]
+        );
+    }
+    public function returnshopinfo()
+    {
+        $user_id = Auth::user()->id;
+        $CharInfo = UserCharacter::where('id', '=', $user_id)->get(); 
+        $ShopInfo = player_shop::where('user_id', '=', $user_id)->get();
+
+
+        
+
+        return view(
+            'playershop',
+            [
+                'CharInfo'=>$CharInfo   
             ]
         );
     }

@@ -19,6 +19,8 @@ Route::get('/playermissions', [PlayerMenusController::class,'missionsmobs'])->mi
 
 //Retorna a view playerprofile perante uma funcao da class generateplayerstats que dá os valores dos stats do jogador
 Route::get('/playerprofile', [GeneratePlayerStats::class, 'returnprofilewithstats'])->middleware(['auth', 'verified'])->name('playerprofile');
+Route::get('/playershop', [PlayerMenusController::class, 'returnshopinfo'])->middleware(['auth', 'verified'])->name('playershop');
+
 //Apenas para testes
 Route::get('/devpage', function () {
 
@@ -27,6 +29,7 @@ Route::get('/devpage', function () {
     return view('devpage', ['users' => User::get()], ['displayid'=> $user_id]);
     
 })->middleware(['auth', 'verified'])->name('devpage');
+
 
 //Escolha nas missions recebe o post(escolha de 1 a 3) e faz o combate
 //Necessário solucao para evitar multiplos clicks na form

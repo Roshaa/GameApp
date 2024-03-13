@@ -47,7 +47,7 @@
             <a class="" href="playerprofile"><button class="btn" style="margin-top: 35%">Player Profile</button></a>
             <a class="" href="template.html"><button class="btn">Horse</button></a>
             <a class="" href="template.html"><button class="btn">Job</button></a>
-            <a class="" href="template.html"><button class="btn">Shop</button></a>
+            <a class="" href="playershop"><button class="btn">Shop</button></a>
             <a class="" href="playermissions"><button class="btn">Missions</button></a>
             <a class="" href="template.html"><button class="btn">Raid</button></a>
             <a class="" href="template.html"><button class="btn">Trade</button></a>
