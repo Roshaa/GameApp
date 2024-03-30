@@ -44,6 +44,7 @@ class PlayerMenusController extends Controller
                 'mobimg' => "$mobimg",
                 'playermissinghp' => "$playermissinghp",
                 'mobmissinghp' => "$mobmissinghp",
+                'combatlog' => $combatlog
             ]
         );
     }

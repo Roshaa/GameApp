@@ -2,7 +2,9 @@
 @section('pagecontent')
 
 @isset($class)
-        <div class="w-2/12"></div>
+<div class="flex w-full bg-opacity-25 bg-no-repeat bg-cover text-white"
+style="background-image: url( 'images/playermissionresult.jpg'  );">
+        <div class="w-1/12"></div>
         <div class="w-4/12 mx-5 mt-5 justify-center text-center">
 
             <img class="mx-auto"
@@ -29,9 +31,18 @@
             <h2 class="border font-medium p-5 text-2xl mt-3">{{ $mobmissinghp }}</h2>
 
         </div>
-        <div class="w-2/12"></div>
+        <div class="w-3/12 mt-5 justify-start font-semibold">
+            @isset($combatlog)
+            @foreach ($combatlog as $log)
+                {{$log}}<br>
+            @endforeach
+            
+            @endisset
+        </div>
+    </div>
         @endisset
 
+        
 
 @isset($mobs)
 <div class="flex w-full bg-opacity-25 bg-no-repeat bg-cover text-white"

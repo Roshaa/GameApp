@@ -47,6 +47,7 @@ class CombatPVE extends Controller
         extract($getstats);
         $playerhp = "$hp";
         $playerhp=str_replace(",","",$playerhp);
+        $combatlog=[];
 
 
         while ($mobhp >= 0 && $playerhp >= 0) {
@@ -76,9 +77,9 @@ class CombatPVE extends Controller
 
 
             $mobhp = $mobhp - $playerattack;
-            echo "Player Attack: " . "$playerattack" . "<br>";
+            $combatlog[]= "Player Attack: " . "$playerattack";
             $playerhp = $playerhp - $playerdefend;
-            echo "Player DamageTaken: " . "$playerdefend" . "<br>";
+            $combatlog[]= "Player DamageTaken: " . "$playerdefend";
         }
 
         $combatresult = [
@@ -94,6 +95,7 @@ class CombatPVE extends Controller
                 'mobimg' => $mobimg,
                 'playermissinghp' => "$playermissinghp",
                 'mobmissinghp' => "$mobmissinghp",
+                'combatlog' => $combatlog,
             ];
 
 

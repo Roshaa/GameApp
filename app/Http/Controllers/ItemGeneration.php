@@ -32,7 +32,7 @@ class ItemGeneration extends Controller
                 $itemrarityroll = 'common';
                 break;
 
-            case $itemrarityroll >= 51 && $itemrarityroll < 80:
+            case $itemrarityroll >= 51 && $itemrarityroll <= 80:
                 $itemrarityroll = 'uncommon';
                 break;
 
