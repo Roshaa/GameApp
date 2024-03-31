@@ -120,6 +120,7 @@ class ItemGeneration extends Controller
         $Items->type = $itemtype;
         $Items->rarity = $itemrarityroll;
         $Items->value=$itemvalue;
+        $Items->created_at = now();
 
         if ($itemtype == 'Head' || $itemtype == 'Chest' || $itemtype == 'Gloves' || $itemtype == 'Boots') {
             $Items->armor = rand($level * 10, $level * 20);

@@ -37,6 +37,7 @@ class PlayerMenusController extends Controller
 
         extract($combatinfo);
 
+
         return view(
             'playermissions',
             [
@@ -44,7 +45,8 @@ class PlayerMenusController extends Controller
                 'mobimg' => "$mobimg",
                 'playermissinghp' => "$playermissinghp",
                 'mobmissinghp' => "$mobmissinghp",
-                'combatlog' => $combatlog
+                'combatlog' => $combatlog,
+                'itemgenerated'=>$itemgenerated
             ]
         );
     }

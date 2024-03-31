@@ -15,6 +15,7 @@ use App\Http\Controllers\PlayerRewardsGeneration;
 
 use App\Models\mobsmissions;
 use App\Models\UserCharacter;
+use App\Models\Items;
 
 
 
@@ -89,14 +90,7 @@ class CombatPVE extends Controller
 
         ];
         extract($combatresult);
-        $combatresultinfo =
-            [
-                'class' => $class,
-                'mobimg' => $mobimg,
-                'playermissinghp' => "$playermissinghp",
-                'mobmissinghp' => "$mobmissinghp",
-                'combatlog' => $combatlog,
-            ];
+        
 
 
         if ($mobhp <= 0) {
@@ -106,6 +100,18 @@ class CombatPVE extends Controller
 
         }
 
+        $itemgenerated=Items::where('user_owner_id', '=', $user_id)->latest()->get();
+        $lastitem=$itemgenerated->last();
+
+        $combatresultinfo =
+        [
+            'class' => $class,
+            'mobimg' => $mobimg,
+            'playermissinghp' => "$playermissinghp",
+            'mobmissinghp' => "$mobmissinghp",
+            'combatlog' => $combatlog,
+            'itemgenerated'=> $lastitem
+        ];
 
         return $combatresultinfo;
     }

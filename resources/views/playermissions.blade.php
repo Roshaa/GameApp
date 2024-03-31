@@ -38,7 +38,11 @@ style="background-image: url( 'images/playermissionresult.jpg'  );">
             @endforeach
             
             @endisset
+            <div class="mt-3">
+                {{$itemgenerated->id}}
+            </div>
         </div>
+        
     </div>
         @endisset
 
