@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\MissionOptionRequest;
 use App\Models\UserCharacter;
-use App\Models\player_shop;
+use App\Models\user_shops;
 
 class PlayerMenusController extends Controller
 {
@@ -54,7 +54,7 @@ class PlayerMenusController extends Controller
     {
         $user_id = Auth::user()->id;
         $CharInfo = UserCharacter::where('id', '=', $user_id)->get(); 
-        $ShopInfo = player_shop::where('user_id', '=', $user_id)->get();
+        $ShopInfo = User_shops::where('user_id', '=', $user_id)->get();
 
 
         
