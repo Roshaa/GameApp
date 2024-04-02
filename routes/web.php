@@ -28,6 +28,7 @@ Route::get('/devpage', function () {
 })->middleware(['auth', 'verified'])->name('devpage');
 
 Route::post('/playermissions',[PlayerMenusController::class,'returncombatview'])->name('CombatResult');
+Route::post('/unlockshop',[PlayerMenusController::class,'unlockshop'])->name('unlockshop');
 Route::post('/chooseclass',[GeneratePlayerStats::class,'submitplayerclass'])->name('ChooseClass');
 Route::post('/playerprofile',[ItemsController::class,'ManageItems'])->name('ManageItems');
 

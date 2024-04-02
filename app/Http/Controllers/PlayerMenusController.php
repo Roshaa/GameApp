@@ -56,15 +56,44 @@ class PlayerMenusController extends Controller
         $CharInfo = UserCharacter::where('id', '=', $user_id)->get(); 
         $ShopInfo = User_shops::where('user_id', '=', $user_id)->get();
 
-
-        
+        $unlockshopoption =0;
+        if($ShopInfo->isEmpty()){
+            $unlockshopoption =1;
+        }
 
         return view(
             'playershop',
             [
-                'CharInfo'=>$CharInfo   
+                'CharInfo'=>$CharInfo,
+                'UnlockShop'=>$unlockshopoption
             ]
         );
+    }
+
+    public function unlockshop()
+    {
+        $user_id = Auth::user()->id;
+        $playergold=UserCharacter::where('id', '=', Auth::user()->id)->value('gold');   
+        $ShopInfo = User_shops::where('user_id', '=', $user_id)->get();
+
+        if($ShopInfo->isEmpty()){
+            if($playergold>=10000){
+            
+                $user_character=UserCharacter::where('id', '=', Auth::user()->id)->first();
+                $user_character->gold=$playergold-10000;
+                
+                $user_shop = new user_shops;
+                $user_shop->user_id = $user_id;
+                $user_shop->shopunlocked = 1;
+
+                $user_shop->save();
+                $user_character->save();
+        
+                return redirect()->route('playershop');
+    
+            } 
+        }
+        
     }
 
 
