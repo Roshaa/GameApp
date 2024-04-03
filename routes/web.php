@@ -4,9 +4,11 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\GeneratePlayerStats;
 use App\Http\Controllers\PlayerMenusController;
-use Illuminate\Support\Facades\Route;
 use App\Models\User;
+use App\Http\Controllers\ShopController;
+
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {return view('welcome');});
 Route::get('/dashboard', function () {return redirect('playerprofile');}); 
@@ -28,7 +30,9 @@ Route::get('/devpage', function () {
 })->middleware(['auth', 'verified'])->name('devpage');
 
 Route::post('/playermissions',[PlayerMenusController::class,'returncombatview'])->name('CombatResult');
-Route::post('/unlockshop',[PlayerMenusController::class,'unlockshop'])->name('unlockshop');
+Route::post('/unlockshop',[ShopController::class,'unlockshop'])->name('unlockshop');
+Route::post('/shopupgrade',[ShopController::class,'shopupgrade'])->name('shopupgrade');
+Route::post('/shoprestock',[ShopController::class,'shoprestock'])->name('shoprestock');
 Route::post('/chooseclass',[GeneratePlayerStats::class,'submitplayerclass'])->name('ChooseClass');
 Route::post('/playerprofile',[ItemsController::class,'ManageItems'])->name('ManageItems');
 

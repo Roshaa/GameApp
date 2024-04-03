@@ -2,7 +2,7 @@
 @section('pagecontent')
 
 @isset($class)
-<div class="flex w-full bg-opacity-25 bg-no-repeat bg-cover text-white"
+<div class="flex w-full  bg-no-repeat bg-cover text-white"
 style="background-image: url( 'images/playermissionresult.jpg'  );">
         <div class="w-1/12"></div>
         <div class="w-4/12 mx-5 mt-5 justify-center text-center">

@@ -317,7 +317,7 @@
                                     @endif
                                     
 
-                                    <button class="ml-auto mr-2" type="submit" value="{{ $BagItemsArray[$i]->id }}"
+                                    <button class="ml-auto mr-2 pr-5 text-red-500" type="submit" value="{{ $BagItemsArray[$i]->id }}"
                                         name="Sell">Sell</button>
                                     <button class="ml-auto mr-2" type="submit" value="{{ $BagItemsArray[$i]->id }}"
                                         name="Equip">Equip</button>
