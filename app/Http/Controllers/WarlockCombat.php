@@ -23,7 +23,7 @@ class WarlockCombat extends Controller
         $damagedealt= $damage;
 
 
-        return $damagedealt;
+        return (float) number_format($damagedealt,2);
 
     }
     public static function WarlockDefend($damagereceived){
@@ -43,7 +43,7 @@ class WarlockCombat extends Controller
             $damagetaken=0;
         }
 
-        return number_format($damagetaken,2);;
+        return (float) number_format($damagetaken,2);
 
     }
 }

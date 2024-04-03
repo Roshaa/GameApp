@@ -21,7 +21,7 @@ class PaladinCombat extends Controller
         $damagedealt= $damage;
 
 
-        return $damagedealt;
+        return (float) number_format($damagedealt,2);
 
     }
     public static function PaladinDefend($damagereceived){
@@ -44,7 +44,7 @@ class PaladinCombat extends Controller
             $damagetaken=0;
         }
         $damagetaken=$damagetaken-$restorehp;
-        return number_format($damagetaken,2);
+        return (float) number_format($damagetaken,2);
 
     }
 }

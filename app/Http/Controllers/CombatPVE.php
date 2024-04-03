@@ -75,7 +75,8 @@ class CombatPVE extends Controller
 
                     break;
             }
-
+            number_format($playerattack, 2);
+            number_format($playerdefend, 2);
 
             $mobhp = $mobhp - $playerattack;
             $combatlog[]= "Player Attack: " . "$playerattack";
@@ -100,9 +101,7 @@ class CombatPVE extends Controller
 
         }
 
-        $itemgenerated=Items::where('user_owner_id', '=', $user_id)->latest()->get();
-        $lastitem=$itemgenerated->last();
-
+        $itemgenerated=Items::where('user_owner_id', '=', $user_id)->orderBy('id', 'desc')->first();
         $combatresultinfo =
         [
             'class' => $class,
@@ -110,7 +109,7 @@ class CombatPVE extends Controller
             'playermissinghp' => "$playermissinghp",
             'mobmissinghp' => "$mobmissinghp",
             'combatlog' => $combatlog,
-            'itemgenerated'=> $lastitem
+            'itemgenerated'=> $itemgenerated
         ];
 
         return $combatresultinfo;

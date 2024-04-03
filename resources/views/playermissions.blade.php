@@ -38,8 +38,105 @@ style="background-image: url( 'images/playermissionresult.jpg'  );">
             @endforeach
             
             @endisset
-            <div class="mt-3">
-                {{$itemgenerated->id}}
+            <div class="mt-3 pr-5">
+                <p class="text-weight-bold">Item Reward</p>
+                <div class="h-12 w-full border-b-2 flex">
+                    <img class=""
+                        src="
+                    @switch($itemgenerated->type)
+                    @case('Head')
+                        {{ 'images/icons/elf-helmet.svg' }}
+                    @break
+                
+                    @case('Chest')
+                        {{ 'images/icons/chest-armor.svg' }}
+                    @break
+                
+                    @case('Gloves')
+                        {{ 'images/icons/gloves.svg' }}
+                    @break
+                
+                    @case('Boots')
+                        {{ 'images/icons/leg-armor.svg' }}
+                    @break
+                
+                    @case('Weapon')
+                        {{ 'images/icons/sword-wound.svg' }}
+                    @break
+                
+                    @case('Ring')
+                        {{ 'images/icons/ring.svg' }}
+                    @break
+                
+                    @case('ProfessionTool')
+                        {{ 'images/icons/anvil-impact.svg' }}
+                    @break
+                
+                    @default
+                @endswitch
+                    "
+                        alt="">
+                    <button disabled class="ml-2 w-full text-left">
+
+
+
+                        @if ($itemgenerated->stat1 != '')
+                            @switch($class)
+                                @case('Assassin')
+                                    {{ 'DEX: ' }}
+                                @break
+
+                                @case('Paladin')
+                                    {{ 'STR: ' }}
+                                @break
+
+                                @case('Warlock')
+                                    {{ 'INT: ' }}
+                                @break
+                            @endswitch {{ $itemgenerated->stat1 }}
+                        @endif
+                        @if ($itemgenerated->stat2 != '')
+                            WLP: {{ $itemgenerated->stat2 }}
+                        @endif
+                        @if ($itemgenerated->stat3 != '')
+                            CON: {{ $itemgenerated->stat3 }}
+                        @endif
+                        @if ($itemgenerated->stat4 != '')
+                            EXP: {{ $itemgenerated->stat4 }}
+                        @endif
+                        @if ($itemgenerated->stat5 != '')
+                            RES: {{ $itemgenerated->stat5 }}
+                        @endif
+                        @if ($itemgenerated->stat6 != '')
+                            MAS: {{ $itemgenerated->stat6 }}
+                        @endif
+                        @if ($itemgenerated->armor != '')
+                            AR: {{ $itemgenerated->armor }}
+                        @endif
+                        @if ($itemgenerated->damage != '')
+                            DAM: {{ $itemgenerated->damage }}
+                        @endif
+                        @if ($itemgenerated->specialeffect1 != '')
+                            SE1: {{ $itemgenerated->specialeffect1 }}
+                        @endif
+                        @if ($itemgenerated->specialeffect2 != '')
+                            SE2: {{ $itemgenerated->specialeffect2 }}
+                        @endif
+                        @if ($itemgenerated->specialeffect3 != '')
+                            SE3: {{ $itemgenerated->specialeffect3 }}
+                        @endif
+                        @if ($itemgenerated->specialeffect4 != '')
+                            SE4: {{ $itemgenerated->specialeffect4 }}
+                        @endif
+                        @if ($itemgenerated->rarity != '')
+                            <span class="mr-5 float-end item{{ $itemgenerated->rarity }}">
+                                {{ $itemgenerated->rarity }}</span>
+                        @endif
+                        @if ($itemgenerated->value != '')
+                            <span class="mr-5 float-end">Value:
+                                {{ $itemgenerated->value }}</span>
+                        @endif
+                </div>
             </div>
         </div>
         

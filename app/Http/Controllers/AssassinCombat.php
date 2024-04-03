@@ -26,7 +26,7 @@ class AssassinCombat extends Controller
             $damagedealt=$damagedealt*2;
         }
 
-        return $damagedealt;
+        return (float) number_format($damagedealt,2);
 
     }
     public static function AssassinDefend($damagereceived){
@@ -50,7 +50,7 @@ class AssassinCombat extends Controller
             $damagetaken=0;
         }
 
-        return number_format($damagetaken,2);
+        return (float) number_format($damagetaken,2);
 
     }
 
