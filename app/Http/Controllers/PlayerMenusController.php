@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\MissionOptionRequest;
 use App\Models\UserCharacter;
 use App\Models\user_shops;
+use App\Models\Items;
 
 class PlayerMenusController extends Controller
 {
@@ -56,18 +57,35 @@ class PlayerMenusController extends Controller
         $user_id = Auth::user()->id;
         $CharInfo = UserCharacter::where('id', '=', $user_id)->get(); 
         $ShopInfo = User_shops::where('user_id', '=', $user_id)->get();
+        $class= $CharInfo[0]->class;
 
         $unlockshopoption =0;
         if($ShopInfo->isEmpty()){
             $unlockshopoption =1;
         }
 
+        $itemsinfoarray=[];
+
+        for ($i=1; $i < 6; $i++) { 
+            
+            $string='shopitem' . strval($i);
+            $b=$ShopInfo[0]->$string; 
+
+            $a=Items::where('id', '=',$b)->first();
+            array_push($itemsinfoarray,$a);
+
+        }   
+        print_r($itemsinfoarray);
+
+
         return view(
             'playershop',
             [
                 'CharInfo'=>$CharInfo,
                 'UnlockShop'=>$unlockshopoption,
-                'ShopInfo'=>$ShopInfo
+                'ShopInfo'=>$ShopInfo,
+                'ItemsInShopArray'=>$itemsinfoarray,
+                'class'=>$class
             ]
         );
         
