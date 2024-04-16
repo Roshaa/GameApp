@@ -1,3 +1,3 @@
-This is where i currently code on my free time.
-The idea is to make something similar to [shakes and fidget](https://sfgame.net/)
-All the art is AI generated from Leonardo.Ai
+I have abandoned this project and start another similar from scratch
+Reasons being i did not do migrations from the beginning and is full of bad code
+Althought i have learn a lot from this since i spent easily 50hours+
