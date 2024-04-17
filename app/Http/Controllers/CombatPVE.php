@@ -31,24 +31,24 @@ class CombatPVE extends Controller
         $class = UserCharacter::where('id', '=', $user_id)->value('class');
         $level = UserCharacter::where('id', '=', $user_id)->value('level');
 
-        $mobinfo=mobsmissions::find($mobchosen);
+        $mobinfo = mobsmissions::find($mobchosen);
 
         $mobname = $mobinfo->MobName;
         $mobhp = $mobinfo->BaseHP;
-        $mobhp=$mobhp+($mobhp*($level*0.7));
+        $mobhp = $mobhp + ($mobhp * ($level * 0.7));
         $mobdamage = $mobinfo->BaseDamage;
         $mobtier = $mobinfo->MobTier;
         $mobimg = $mobinfo->imglink;
-        
-        $mobexp=$mobinfo->mobexp;
-        $incrementalexp=$level*0.05;
-        $mobexp=$mobexp*(1+$incrementalexp);
+
+        $mobexp = $mobinfo->mobexp;
+        $incrementalexp = $level * 0.05;
+        $mobexp = $mobexp * (1 + $incrementalexp);
 
         $getstats = GeneratePlayerStats::GenerateStats();
         extract($getstats);
         $playerhp = "$hp";
-        $playerhp=str_replace(",","",$playerhp);
-        $combatlog=[];
+        $playerhp = str_replace(",", "", $playerhp);
+        $combatlog = [];
 
 
         while ($mobhp >= 0 && $playerhp >= 0) {
@@ -64,7 +64,7 @@ class CombatPVE extends Controller
 
                     $playerattack = PaladinCombat::PaladinAttack();
                     $playerdefend = PaladinCombat::PaladinDefend($mobrandomdamage);
-                   
+
 
 
                     break;
@@ -75,13 +75,13 @@ class CombatPVE extends Controller
 
                     break;
             }
-            number_format($playerattack, 2);
-            number_format($playerdefend, 2);
+            $playerattack = round($playerattack, 2);
+            $playerdefend = round($playerdefend, 2);
 
             $mobhp = $mobhp - $playerattack;
-            $combatlog[]= "Player Attack: " . "$playerattack";
+            array_push($combatlog, "Player Attack: " . $playerattack);
             $playerhp = $playerhp - $playerdefend;
-            $combatlog[]= "Player DamageTaken: " . "$playerdefend";
+            array_push($combatlog, "Player DamageTaken: " . $playerdefend);
         }
 
         $combatresult = [
@@ -91,7 +91,7 @@ class CombatPVE extends Controller
 
         ];
         extract($combatresult);
-        
+
 
 
         if ($mobhp <= 0) {
@@ -101,16 +101,16 @@ class CombatPVE extends Controller
 
         }
 
-        $itemgenerated=Items::where('user_owner_id', '=', $user_id)->orderBy('id', 'desc')->first();
+        $itemgenerated = Items::where('user_owner_id', '=', $user_id)->orderBy('id', 'desc')->first();
         $combatresultinfo =
-        [
-            'class' => $class,
-            'mobimg' => $mobimg,
-            'playermissinghp' => "$playermissinghp",
-            'mobmissinghp' => "$mobmissinghp",
-            'combatlog' => $combatlog,
-            'itemgenerated'=> $itemgenerated
-        ];
+            [
+                'class' => $class,
+                'mobimg' => $mobimg,
+                'playermissinghp' => "$playermissinghp",
+                'mobmissinghp' => "$mobmissinghp",
+                'combatlog' => $combatlog,
+                'itemgenerated' => $itemgenerated
+            ];
 
         return $combatresultinfo;
     }
