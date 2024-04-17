@@ -75,6 +75,22 @@ class PlayerMenusController extends Controller
     
             } 
         }
+        $usershopinfo=User_shops::where('user_id', '=', $user_id)->first();
+            switch ($usershopinfo->reputationlevel) {
+                case 0:
+                    $valuemultiplier=30;
+                    break;
+                case 1:
+                    $valuemultiplier=28;
+                    break;
+                case 2:
+                    $valuemultiplier=24;
+                    break;
+                case 3:
+                    $valuemultiplier=20;
+                    break;
+
+            }
         
 
           
@@ -86,7 +102,8 @@ class PlayerMenusController extends Controller
                 'UnlockShop'=>$unlockshopoption,
                 'ShopInfo'=>$ShopInfo,
                 'ItemsInShopArray'=>$itemsinfoarray,
-                'class'=>$class
+                'class'=>$class,
+                'valuemultiplier'=>$valuemultiplier
             ]
         );
         

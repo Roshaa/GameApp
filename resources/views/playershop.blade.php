@@ -4,6 +4,7 @@
         style="background-image: url( 'images/playershopbackground.jpg'  );">
         <div class="w-full text-center h-full pt-5 flex">
 
+            
             @if ($UnlockShop == 1)
                 <form action="/unlockshop" method="POST">
                     @csrf
@@ -15,7 +16,6 @@
                 <div class="w-3/12 pl-5"> <img src="images/playershopvendor.jpg" alt=""></div>
                 <div class="w-6/12">
                     <div>
-
                         @foreach ($ItemsInShopArray as $Item)
                             @if ($Item)
                                 <form method="POST" class="h-12 w-full border-b-2 flex" action="/shopbuy" class="mt-5">
@@ -113,7 +113,7 @@
                                         @endif
                                         @if ($Item->value != '')
                                             <span class="mr-5 float-end">Value:
-                                                {{ $Item->value * 30}}</span>
+                                                {{ $Item->value *$valuemultiplier}}</span>
                                         @endif
 
                                         <span>
@@ -130,6 +130,7 @@
                     <form method="POST" action="/shoprestock" class="mt-5">
                         @csrf
                         <button type="submit" class="border p-2 border-white rounded text-orange-400">Restock</button>
+                        <p>Cost: {{$CharInfo[0]->level*125}}</p>
                     </form>
                 </div>
                 <div class="w-3/12 pr-5">
