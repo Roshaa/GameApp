@@ -63,21 +63,22 @@ class PlayerMenusController extends Controller
         if($ShopInfo->isEmpty()){
             $unlockshopoption =1;
         }
-
         $itemsinfoarray=[];
-
-        for ($i=1; $i < 6; $i++) { 
+        if($unlockshopoption==0){
+            for ($i=1; $i < 6; $i++) { 
             
-            $string='shopitem' . strval($i);
-            $b=$ShopInfo[0]->$string; 
+                $string='shopitem' . strval($i);
+                $b=$ShopInfo[0]->$string; 
+    
+                $a=Items::where('id', '=',$b)->first();
+                array_push($itemsinfoarray,$a);
+    
+            } 
+        }
+        
 
-            $a=Items::where('id', '=',$b)->first();
-            array_push($itemsinfoarray,$a);
-
-        }   
-        print_r($itemsinfoarray);
-
-
+          
+        
         return view(
             'playershop',
             [

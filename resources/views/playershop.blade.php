@@ -18,7 +18,8 @@
 
                         @foreach ($ItemsInShopArray as $Item)
                             @if ($Item)
-                                <div class="h-12 w-full border-b-2 flex">
+                                <form method="POST" class="h-12 w-full border-b-2 flex" action="/shopbuy" class="mt-5">
+                                    @csrf
                                     <img class=""
                                         src="
                                 @switch($Item->type)
@@ -112,10 +113,14 @@
                                         @endif
                                         @if ($Item->value != '')
                                             <span class="mr-5 float-end">Value:
-                                                {{ $Item->value }}</span>
+                                                {{ $Item->value * 30}}</span>
                                         @endif
 
-                                </div>
+                                        <span>
+                                            <button type="submit" value="{{ $Item->id }}" name='itemid'
+                                                class="text-white">Buy</button>
+                                        </span>
+                                </form>
                             @endif
                         @endforeach
 
@@ -137,6 +142,23 @@
                                 <div>Stock Level<br>{{ $ShopInfo[0]->shopitems }}</div>
                                 <button type="submit"
                                     class="border p-2 border-white rounded text-orange-400">Upgrade</button>
+                                <p>
+                                    @switch($ShopInfo[0]->shopitems)
+                                        @case(0)
+                                            30000
+                                        @break
+
+                                        @case(1)
+                                            100000
+                                        @break
+
+                                        @case(2)
+                                            1000000
+                                        @break
+
+                                        @default
+                                    @endswitch
+                                </p>
                             </form>
                         </div>
                     @endif

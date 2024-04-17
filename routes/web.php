@@ -33,6 +33,7 @@ Route::post('/playermissions',[PlayerMenusController::class,'returncombatview'])
 Route::post('/unlockshop',[ShopController::class,'unlockshop'])->name('unlockshop');
 Route::post('/shopupgrade',[ShopController::class,'shopupgrade'])->name('shopupgrade');
 Route::post('/shoprestock',[ShopController::class,'shoprestock'])->name('shoprestock');
+Route::post('/shopbuy',[ShopController::class,'shopbuy'])->name('shopbuy');
 Route::post('/chooseclass',[GeneratePlayerStats::class,'submitplayerclass'])->name('ChooseClass');
 Route::post('/playerprofile',[ItemsController::class,'ManageItems'])->name('ManageItems');
 
