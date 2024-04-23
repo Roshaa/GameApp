@@ -207,7 +207,9 @@
 <div class="flex w-full h-12 text-2xl border-t-2 mb-3 mt-10 justify-start text-center">
 
     <h1 class="text-2xl mr-auto">Inventory      {{$BagSlots}} / 10 Slots</h1>
-    <div class="h-12 flex ml-auto"><button class="h-12 w-12 mr-5" disabled>{{$CharInfo[0]->gold}}</button><img class="h-12 w-12" src="images/icons/two-coins.svg" alt=""></div> 
+    <button class="h-12 w-36 flex" disabled>{{$CharInfo[0]->gold}}<img class="h-12 w-12" src="images/icons/two-coins.svg" alt=""></button>
+        
+
     
 </div>
             
